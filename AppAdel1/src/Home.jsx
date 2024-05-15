@@ -73,7 +73,7 @@ function Home() {
 
           </div>
           <div className="icones">
-            <a target='_blank' rel="stylesheet" href="https://www.instagram.com/adelparquealvoradai/">
+            <a className='InstagramLink' target='_blank' rel="stylesheet" href="https://www.instagram.com/adelparquealvoradai/">
               <div className="paginstagram">
                 <img src={instagram} alt="Instagram" />
                 <p>Instagram</p>
