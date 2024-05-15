@@ -73,11 +73,12 @@ function Home() {
 
           </div>
           <div className="icones">
-
-            <div className="paginstagram">
-              <img src={instagram} alt="Instagram" />
-              <p>Instagram</p>
-            </div>
+            <a target='_blank' rel="stylesheet" href="https://www.instagram.com/adelparquealvoradai/">
+              <div className="paginstagram">
+                <img src={instagram} alt="Instagram" />
+                <p>Instagram</p>
+              </div>
+            </a>
 
             <div className="paggrupo">
               <img src={grupo} alt="PGI" />
