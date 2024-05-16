@@ -41,44 +41,44 @@ function Home() {
         <div className="icones">
           <div onClick={() => {
             router.push("/church");
-          }} className="pagigreja">
-            <img src={igreja.src} alt="Igreja" />
+          }}>
+            <img className="pagigreja" src={igreja.src} alt="Igreja" />
             <p>Igreja</p>
           </div>
 
           <div onClick={() => {
             router.push("/ministry");
-          }} className="pagministerio">
-            <img src={ministerio.src} alt="Ministerio" />
+          }}>
+            <img className="pagministerio" src={ministerio.src} alt="Ministerio" />
             <p>Ministério</p>
           </div>
 
           <div onClick={() => {
             router.push('/news')
-          }} className="pagnoticia">
-            <img src={noticia.src} alt="Notícias" />
+          }} >
+            <img className="pagnoticia" src={noticia.src} alt="Notícias" />
             <p>Notícias</p>
           </div>
         </div>
         <div className="icones">
           <div onClick={() => {
             router.push("/bible");
-          }} className="pagbiblia">
-            <img src={biblia.src} alt="Bíblia" />
+          }} >
+            <img className="pagbiblia" src={biblia.src} alt="Bíblia" />
             <p>Bíblia</p>
           </div>
 
           <div onClick={() => {
             router.push('/prayer')
-          }} className="pagoracao">
-            <img src={oracao.src} alt="Oração" />
+          }} >
+            <img className="pagoracao" src={oracao.src} alt="Oração" />
             <p>Oração</p>
           </div>
 
           <div onClick={() => {
             router.push('/photos')
-          }} className="pagfoto">
-            <img src={foto.src} alt="Fotos" />
+          }} >
+            <img className="pagfoto" src={foto.src} alt="Fotos" />
             <p>Fotos</p>
           </div>
         </div>
@@ -89,23 +89,23 @@ function Home() {
             rel="stylesheet"
             href="https://www.instagram.com/adelparquealvoradai/"
           >
-            <div className="paginstagram">
-              <img src={instagram.src} alt="Instagram" />
+            <div>
+              <img className="paginstagram" src={instagram.src} alt="Instagram" />
               <p>Instagram</p>
             </div>
           </a>
 
           <div onClick={() => {
             router.push('/pgi')
-          }} className="paggrupo">
-            <img src={grupo.src} alt="PGI" />
+          }} >
+            <img className="paggrupo" src={grupo.src} alt="PGI" />
             <p>PGI</p>
           </div>
 
           <div onClick={() => {
             router.push('/schedule')
-          }} className="pagagenda">
-            <img src={agenda.src} alt="Agenda" />
+          }} >
+            <img className="pagagenda" src={agenda.src} alt="Agenda" />
             <p>Agenda</p>
           </div>
         </div>
