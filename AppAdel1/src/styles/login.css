@@ -4,10 +4,19 @@ body {
   background-repeat: no-repeat;
   background-size: 100% 22%;
 }
+.savepassword{
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.check{
+  display: flex;
+}
 .resetpassord{
   color: red;
   display: flex;
   justify-content: end;
-  width: 90%;
-  margin-top: 15px;
 }

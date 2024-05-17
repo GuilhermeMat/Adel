@@ -46,7 +46,13 @@ export default function LoginPage() {
           placeholder="Senha"
         />
       </Box>
-      <span className="resetpassord">Esqueceu a senha?</span>
+      <Box className="savepassword">
+        <Box className="check">
+        <input type="checkbox" name="" id="" />
+        <Typography variant="caption" color="#fff">Guardar Senha</Typography>
+        </Box>
+        <span className="resetpassord">Esqueceu a senha?</span>
+      </Box>
       <Button
         sx={{
           display: "flex",
