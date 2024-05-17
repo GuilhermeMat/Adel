@@ -1,30 +1,34 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/login.css";
 import { Box, Button, InputBase, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import adel from "../img/adel.png";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 export default function LoginPage() {
   const router = useRouter()
   const [email, setEmail] = useState("");
   const [button, setButton] = useState(true);
+  const [visibility, setVisibility] = useState(false);
   const [pass, setPass] = useState("");
 
   const handleEmail = (event) => {
-    console.log(event.target.value)
     setEmail(event.target.value)
-    const emailValid = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+?$/i;
-    if (event.target.value.match(emailValid)) {
-      console.log("Email Válido!")
-    } else {
-      console.log("INVALIDO!")
-    }
   }
 
   const handlePassword = (event) => {
-    console.log(event.target.value)
     setPass(event.target.value)
   }
+
+  useEffect(() => {
+    const emailValid = /^[\w._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i;
+    if (email.match(emailValid) && pass.length >= 4) {
+      setButton(false)
+    } else {
+      setButton(true)
+    }
+  }, [email, pass])
 
   return (
     <Box sx={{ height: '98vh' }}
@@ -32,6 +36,9 @@ export default function LoginPage() {
       justifyContent='center'
       flexDirection="column"
     >
+      <Box className="logo">
+        <img className="logologin" src={adel.src} alt="" />
+      </Box>
       <Box display="flex" justifyContent='center'>
         <Typography fontWeight={800} variant="h4" color='white'>Bem Vindo!</Typography>
       </Box>
@@ -57,6 +64,12 @@ export default function LoginPage() {
       <span style={{ margin: '8px 0 8px 10%', color: 'white' }}>Senha</span>
       <Box display="flex" justifyContent='center'>
         <InputBase
+          endAdornment={
+            <Button onClick={() => setVisibility(!visibility)} className="passwordEye">
+              { visibility ? <VisibilityOff fontSize="medium" /> : <Visibility fontSize="medium" /> }
+            </Button>
+          }
+          type={visibility ? "text" : "password"}
           value={pass}
           onChange={handlePassword}
           sx={{
@@ -70,13 +83,20 @@ export default function LoginPage() {
           placeholder="Senha"
         />
       </Box>
-      <span style={{ margin: '5px 0 8px 60%', color: 'red' }}>Esqueceu a senha?</span>
+      <Box className="savepassword">
+        <Box className="check">
+        <input type="checkbox" name="" id="" />
+        <Typography variant="caption" color="#fff">Guardar Senha</Typography>
+        </Box>
+        <span className="resetpassord">Esqueceu a senha?</span>
+      </Box>
       <Button
         disabled={button}
         onClick={() => {
           router.push('/home')
         }}
         sx={{
+          display: "flex",
           backgroundColor: '#29B6F6',
           borderRadius: '22px',
           color: 'white',
