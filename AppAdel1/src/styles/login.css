@@ -1,0 +1,13 @@
+body {
+  background-color: black;
+  background-image: url('../img//Rectangle\ 98.png');
+  background-repeat: no-repeat;
+  background-size: 100% 22%;
+}
+.resetpassord{
+  color: red;
+  display: flex;
+  justify-content: end;
+  width: 90%;
+  margin-top: 15px;
+}
