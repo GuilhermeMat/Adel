@@ -22,14 +22,15 @@
 }
 .icones{
     display: flex;
+    align-items: center;
+    text-align: center;
     justify-content: space-around;
     margin-top: 50px;
 }
-.icones .pagigreja, .pagministerio, .pagnoticia, .pagbiblia, .pagoracao, .pagfoto, .paginstagram, .paggrupo, .pagagenda{
+.pagigreja, .pagministerio, .pagnoticia, .pagbiblia, .pagoracao, .pagfoto, .paginstagram, .paggrupo, .pagagenda{
     display: block;
     align-items: center;
     text-align: center;
-    width: 80px;
 }
 .icones .pagigreja:hover, .pagministerio:hover, .pagnoticia:hover, .pagbiblia:hover, .pagoracao:hover, .pagfoto:hover, .paginstagram:hover, .paggrupo:hover, .pagagenda:hover{
     background-color: #7fffd430;
