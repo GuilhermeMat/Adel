@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import "../styles/login.css";
 import { Box, Button, InputBase, Typography } from "@mui/material";
+import adel from "../img/adel.png";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -12,6 +13,9 @@ export default function LoginPage() {
       justifyContent='center'
       flexDirection="column"
     >
+      <Box className="logo">
+        <img className="logologin" src={adel.src} alt="" />
+      </Box>
       <Box display="flex" justifyContent='center'>
         <Typography fontWeight={800} variant="h4" color='white'>Bem Vindo!</Typography>
       </Box>
