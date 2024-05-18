@@ -1,10 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import "../styles/login.css";
 import { Box, Button, InputBase, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
 import adel from "../img/adel.png";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const router = useRouter()
@@ -31,7 +30,8 @@ export default function LoginPage() {
   }, [email, pass])
 
   return (
-    <Box sx={{ height: '98vh' }}
+    <Box
+      className="pageContainer"
       display="flex"
       justifyContent='center'
       flexDirection="column"
