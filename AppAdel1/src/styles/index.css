@@ -46,3 +46,7 @@
     transition: 0.3s;
     border-radius: 5px;
 }
+
+.imgconfig, .imgperfil {
+    padding: 20px;
+}
