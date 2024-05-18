@@ -1,10 +1,29 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/login.css";
 import { Box, Button, InputBase, Typography } from "@mui/material";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
+  const [button, setButton] = useState(true);
+  const [pass, setPass] = useState("");
+
+  const handleEmail = (event) => {
+    setEmail(event.target.value)
+  }
+
+  const handlePassword = (event) => {
+    setPass(event.target.value)
+  }
+
+  useEffect(() => {
+    const emailValid = /^[\w._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i;
+    if (email.match(emailValid) && pass.length >= 4) {
+      setButton(false)
+    } else {
+      setButton(true)
+    }
+  }, [email, pass])
 
   return (
     <Box sx={{ height: '98vh' }}
@@ -35,6 +54,9 @@ export default function LoginPage() {
       <span style={{ margin: '8px 0 8px 10%', color: 'white' }}>Senha</span>
       <Box display="flex" justifyContent='center'>
         <InputBase
+          type="password"
+          value={pass}
+          onChange={handlePassword}
           sx={{
             border: "1px solid black",
             borderRadius: "6px",
