@@ -4,8 +4,10 @@ import "../styles/login.css";
 import { Box, Button, InputBase, Typography } from "@mui/material";
 import adel from "../img/adel.png";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter()
   const [email, setEmail] = useState("");
   const [button, setButton] = useState(true);
   const [visibility, setVisibility] = useState(false);
@@ -46,6 +48,7 @@ export default function LoginPage() {
       <span style={{ margin: '0 0 8px 10%', color: 'white' }}>Email</span>
       <Box display="flex" justifyContent='center'>
         <InputBase
+          value={email}
           onChange={handleEmail}
           sx={{
             border: "1px solid black",
@@ -89,6 +92,9 @@ export default function LoginPage() {
       </Box>
       <Button
         disabled={button}
+        onClick={() => {
+          router.push('/home')
+        }}
         sx={{
           display: "flex",
           backgroundColor: '#29B6F6',

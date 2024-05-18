@@ -13,6 +13,8 @@ import grupo from "../img/grupo.png";
 import agenda from "../img/agenda.png";
 import { useRouter } from "next/navigation";
 import Bible from "@/app/bible/page";
+import "../styles/home.css"
+import "../styles/index.css"
 
 function Home() {
   const router = useRouter();
