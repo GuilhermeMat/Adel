@@ -1,3 +1,12 @@
+import { Box, Typography } from "@mui/material";
+
 export default function Settings() {
-    return <h1>Página das Configurações</h1>
+    return (
+        <Box
+            className="pageContainer"
+        >
+            <Typography variant='h2' color='white'>Página das Configurações</Typography>
+    
+        </Box>
+      );
 }

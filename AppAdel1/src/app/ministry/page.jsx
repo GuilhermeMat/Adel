@@ -1,3 +1,12 @@
+import { Box, Typography } from "@mui/material";
+
 export default function Ministry() {
-    return <h1>Página do Ministério</h1>
+    return (
+        <Box
+            className="pageContainer"
+        >
+            <Typography variant='h2' color='white'>Página do Ministério</Typography>
+    
+        </Box>
+      );
 }
