@@ -43,21 +43,21 @@ function Home() {
             router.push("/church");
           }}>
             <img className="pagigreja" src={igreja.src} alt="Igreja" />
-            <p>Igreja</p>
+            <p style={{color:'white'}}>Igreja</p>
           </div>
 
           <div onClick={() => {
             router.push("/ministry");
           }}>
             <img className="pagministerio" src={ministerio.src} alt="Ministerio" />
-            <p>Ministério</p>
+            <p style={{color:'white'}}>Ministério</p>
           </div>
 
           <div onClick={() => {
             router.push('/news')
           }} >
             <img className="pagnoticia" src={noticia.src} alt="Notícias" />
-            <p>Notícias</p>
+            <p style={{color:'white'}}>Notícias</p>
           </div>
         </div>
         <div className="icones">
@@ -65,21 +65,21 @@ function Home() {
             router.push("/bible");
           }} >
             <img className="pagbiblia" src={biblia.src} alt="Bíblia" />
-            <p>Bíblia</p>
+            <p style={{color:'white'}}>Bíblia</p>
           </div>
 
           <div onClick={() => {
             router.push('/prayer')
           }} >
             <img className="pagoracao" src={oracao.src} alt="Oração" />
-            <p>Oração</p>
+            <p style={{color:'white'}}>Oração</p>
           </div>
 
           <div onClick={() => {
             router.push('/photos')
           }} >
             <img className="pagfoto" src={foto.src} alt="Fotos" />
-            <p>Fotos</p>
+            <p style={{color:'white'}}>Fotos</p>
           </div>
         </div>
         <div className="icones">
@@ -91,7 +91,7 @@ function Home() {
           >
             <div>
               <img className="paginstagram" src={instagram.src} alt="Instagram" />
-              <p>Instagram</p>
+              <p style={{color:'white'}}>Instagram</p>
             </div>
           </a>
 
@@ -99,17 +99,20 @@ function Home() {
             router.push('/pgi')
           }} >
             <img className="paggrupo" src={grupo.src} alt="PGI" />
-            <p>PGI</p>
+            <p style={{color:'white'}}>PGI</p>
           </div>
 
           <div onClick={() => {
             router.push('/schedule')
           }} >
             <img className="pagagenda" src={agenda.src} alt="Agenda" />
-            <p>Agenda</p>
+            <p style={{color:'white'}}>Agenda</p>
           </div>
         </div>
       </div>
+      {/* <footer>
+        <p>Rodapé aqui...</p>
+      </footer> */}
     </div>
   );
 }
