@@ -3,24 +3,22 @@ import logo from "../img/adel.png";
 import config from "../img/configuracao.png";
 import perfil from "../img/usuario.png";
 import igreja from "../img/igreja.png";
-import ministerio from "../img/ministerio.png";
 import noticia from "../img/noticia.png";
 import biblia from "../img/biblia.png";
 import oracao from "../img/oracao.png";
 import foto from "../img/foto.png";
 import instagram from "../img/instagram.png";
 import grupo from "../img/grupo.png";
+import ministerio from "../img/ministerio.png";
 import agenda from "../img/agenda.png";
 import { useRouter } from "next/navigation";
-import Bible from "@/app/bible/page";
-import "../styles/home.css"
-import "../styles/index.css"
+
 
 function Home() {
   const router = useRouter();
 
   return (
-    <div className="capsula">
+    <div className="pageContainer">
       <div className="nav">
         <div onClick={() => {
           router.push('/settings')
