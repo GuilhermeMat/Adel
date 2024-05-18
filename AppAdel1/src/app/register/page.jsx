@@ -5,7 +5,7 @@ import adel from "../../img/adel.png";
 import { useEffect, useState } from "react";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useRouter } from "next/navigation";
-import axius from "axius"
+import axios from "axios"
 
 export default function ResgisterPage() {
   const [email, setEmail] = useState("");
@@ -29,7 +29,14 @@ export default function ResgisterPage() {
 
   const registerRequest = async () => {
     try {
-      const response = await 
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/register`, {
+        nickname: name,
+        email,
+        password: pass
+      })
+      if (response.status === 200) {
+        router.push('/home')
+      }
     } catch (error) {
       
     }
