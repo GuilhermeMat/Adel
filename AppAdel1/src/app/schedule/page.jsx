@@ -1,3 +1,12 @@
+import { Box, Typography } from "@mui/material";
+
 export default function Schedule() {
-    return <h1>Página da Agenda</h1>
+    return (
+        <Box
+            className="pageContainer"
+        >
+            <Typography variant='h2' color='white'>Página da agenda</Typography>
+    
+        </Box>
+      );
 }

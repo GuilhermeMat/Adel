@@ -1,5 +1,13 @@
+import { Box, Typography } from '@mui/material';
 import '../../styles/login.css'
 
 export default function ResgisterPage() {
-    return <h1>Página de registro</h1>
+    return (
+        <Box
+            className="pageContainer"
+        >
+            <Typography variant='h2' color='white'>Página do Registro</Typography>
+    
+        </Box>
+      );
 }
