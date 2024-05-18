@@ -30,7 +30,7 @@ export default function ResgisterPage() {
   const registerRequest = async () => {
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/register`, {
-        nickname: name,
+        nickName: name,
         email,
         password: pass
       })
