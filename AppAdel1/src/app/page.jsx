@@ -1,7 +1,5 @@
-import Home from "../components/Home";
-import '../styles/home.css'
-import '../styles/index.css'
+import LoginPage from "../components/Login";
 
 export default function Page() {
-  return <Home />
+  return <LoginPage />
 }
