@@ -28,7 +28,7 @@ export default function LoginPage() {
       setButton(true)
     }
   }, [email, pass])
-
+  
   return (
     <Box
       className="pageContainer"
