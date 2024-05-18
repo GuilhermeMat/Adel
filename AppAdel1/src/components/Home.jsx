@@ -12,15 +12,13 @@ import grupo from "../img/grupo.png";
 import ministerio from "../img/ministerio.png";
 import agenda from "../img/agenda.png";
 import { useRouter } from "next/navigation";
-import "../styles/home.css"
-import "../styles/index.css"
 
 
 function Home() {
   const router = useRouter();
 
   return (
-    <div className="capsula">
+    <div className="pageContainer">
       <div className="nav">
         <div onClick={() => {
           router.push('/settings')
