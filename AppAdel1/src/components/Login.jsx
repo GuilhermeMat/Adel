@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 import "../styles/login.css";
 import { Box, Button, InputBase, Typography } from "@mui/material";
 import adel from "../img/adel.png";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [button, setButton] = useState(true);
+  const [visibility, setVisibility] = useState(false);
   const [pass, setPass] = useState("");
 
   const handleEmail = (event) => {
@@ -44,6 +46,7 @@ export default function LoginPage() {
       <span style={{ margin: '0 0 8px 10%', color: 'white' }}>Email</span>
       <Box display="flex" justifyContent='center'>
         <InputBase
+          onChange={handleEmail}
           sx={{
             border: "1px solid black",
             borderRadius: "6px",
@@ -58,7 +61,12 @@ export default function LoginPage() {
       <span style={{ margin: '8px 0 8px 10%', color: 'white' }}>Senha</span>
       <Box display="flex" justifyContent='center'>
         <InputBase
-          type="password"
+          endAdornment={
+            <Button onClick={() => setVisibility(!visibility)} className="passwordEye">
+              { visibility ? <VisibilityOff fontSize="medium" /> : <Visibility fontSize="medium" /> }
+            </Button>
+          }
+          type={visibility ? "text" : "password"}
           value={pass}
           onChange={handlePassword}
           sx={{
@@ -80,6 +88,7 @@ export default function LoginPage() {
         <span className="resetpassord">Esqueceu a senha?</span>
       </Box>
       <Button
+        disabled={button}
         sx={{
           display: "flex",
           backgroundColor: '#29B6F6',
