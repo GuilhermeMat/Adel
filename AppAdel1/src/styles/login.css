@@ -1,10 +1,3 @@
-body {
-  background-color: black;
-  background-image: url('../img//Rectangle\ 98.png');
-  background-repeat: no-repeat;
-  background-size: 100% 22%;
-  height: 98vh;
-}
 .logo{
  display: flex;
   justify-content: center;

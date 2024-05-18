@@ -12,15 +12,12 @@ import instagram from "../img/instagram.png";
 import grupo from "../img/grupo.png";
 import agenda from "../img/agenda.png";
 import { useRouter } from "next/navigation";
-import Bible from "@/app/bible/page";
-import "../styles/home.css"
-import "../styles/index.css"
 
 function Home() {
   const router = useRouter();
 
   return (
-    <div className="capsula">
+    <div className="pageContainer">
       <div className="nav">
         <div onClick={() => {
           router.push('/settings')
