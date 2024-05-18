@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/login.css";
 import { Box, Button, InputBase, Typography } from "@mui/material";
+import adel from "../img/adel.png";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -31,6 +32,9 @@ export default function LoginPage() {
       justifyContent='center'
       flexDirection="column"
     >
+      <Box className="logo">
+        <img className="logologin" src={adel.src} alt="" />
+      </Box>
       <Box display="flex" justifyContent='center'>
         <Typography fontWeight={800} variant="h4" color='white'>Bem Vindo!</Typography>
       </Box>
@@ -68,9 +72,16 @@ export default function LoginPage() {
           placeholder="Senha"
         />
       </Box>
-      <span style={{ margin: '5px 0 8px 60%', color: 'red' }}>Esqueceu a senha?</span>
+      <Box className="savepassword">
+        <Box className="check">
+        <input type="checkbox" name="" id="" />
+        <Typography variant="caption" color="#fff">Guardar Senha</Typography>
+        </Box>
+        <span className="resetpassord">Esqueceu a senha?</span>
+      </Box>
       <Button
         sx={{
+          display: "flex",
           backgroundColor: '#29B6F6',
           borderRadius: '22px',
           color: 'white',

@@ -4,3 +4,29 @@ body {
   background-repeat: no-repeat;
   background-size: 100% 22%;
 }
+.logo{
+ display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.logologin{
+  width: 150px;
+  height: 150px;
+  display: flex;
+}
+.savepassword{
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.check{
+  display: flex;
+}
+.resetpassord{
+  color: red;
+  display: flex;
+  justify-content: end;
+}
