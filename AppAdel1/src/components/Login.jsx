@@ -109,7 +109,18 @@ export default function LoginPage() {
         Entrar
       </Button>
       <Box display="flex" justifyContent='center'>
-        <Typography color='grey'>Não tem uma conta? <span style={{ color: 'white' }}>Crie agora</span></Typography>
+        <Typography color='grey'>Não tem uma conta?
+        <Button
+          onClick={() => {
+            router.push('/register')
+          }}
+          sx={{
+            color: "#29B6F6",
+          }}
+        >
+          Crie agora
+        </Button>
+        </Typography>
       </Box>
     </Box>
   );
