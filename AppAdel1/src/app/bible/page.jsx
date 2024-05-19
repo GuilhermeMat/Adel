@@ -1,12 +1,5 @@
-import { Box, Typography } from "@mui/material";
+import Bible from "@/components/Bible";
 
-export default function Bible() {
-    return (
-        <Box
-            className="pageContainer"
-        >
-            <Typography variant='h2' color='white'>Página da Bíblia</Typography>
-    
-        </Box>
-      );
+export default function BiblePage () {
+    return <Bible />
 }
