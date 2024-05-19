@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, InputBase, Typography } from "@mui/material";
+import { Alert, Box, Button, InputBase, Slide, Typography } from "@mui/material";
 import "../../styles/login.css";
 import adel from "../../img/adel.png";
 import { useEffect, useState } from "react";
@@ -11,6 +11,7 @@ export default function ResgisterPage() {
   const [email, setEmail] = useState("");
   const [button, setButton] = useState(true);
   const [visibility, setVisibility] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const [pass, setPass] = useState("");
   const [name, setName] = useState("");
   const router = useRouter();
@@ -38,7 +39,13 @@ export default function ResgisterPage() {
         router.push('/home')
       }
     } catch (error) {
-      
+      console.log('error', error)
+      if (error.response.status === 409) {
+        setErrorMsg('Email já cadastrado no sistema')
+        setTimeout(() => {
+          setErrorMsg('')
+        }, 3000)
+      }
     }
   }
 
@@ -49,7 +56,7 @@ export default function ResgisterPage() {
     } else {
       setButton(true);
     }
-  }, [email, pass, name]); 
+  }, [email, pass, name]);
 
   return (
     <Box
@@ -58,6 +65,29 @@ export default function ResgisterPage() {
       justifyContent="center"
       flexDirection="column"
     >
+      { errorMsg && (
+        <Slide
+          direction='down'
+          in={!!errorMsg}
+          timeout={800}
+          hidden={errorMsg === ''}
+          mountOnEnter
+          unmountOnExit
+          style={{
+            position: 'absolute',
+            top: "30px",
+            left: "65px",
+            transform: 'translate(-50%, -50%)',
+            zIndex: 1,
+          }}
+        >
+          <Alert
+            severity="error"
+          >
+            { errorMsg }
+          </Alert>
+        </Slide>
+      ) }
       <Box className="logo">
         <img className="logologin" src={adel.src} alt="" />
       </Box>
