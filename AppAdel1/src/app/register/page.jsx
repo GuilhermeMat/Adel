@@ -8,6 +8,15 @@ import { useRouter } from "next/navigation";
 import axios from "axios"
 
 export default function ResgisterPage() {
+  return (
+        <Box
+            className="pageContainer"
+        >
+            <Typography variant='h2' color='white'>Página do Registro</Typography>
+        
+        </Box>
+      );
+}
   const [email, setEmail] = useState("");
   const [button, setButton] = useState(true);
   const [visibility, setVisibility] = useState(false);
@@ -166,3 +175,4 @@ export default function ResgisterPage() {
     </Box>
   );
 }
+
