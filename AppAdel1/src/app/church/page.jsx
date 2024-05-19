@@ -25,7 +25,6 @@ export default function Church() {
                     <Typography color='#fff'>Pastor - Antônio Marcos</Typography>
                     <Typography color='#fff'>Pastora - Julliane</Typography>
                 </Box>
-                <Box></Box>
             </Box>
         </Box>
     </Box>
