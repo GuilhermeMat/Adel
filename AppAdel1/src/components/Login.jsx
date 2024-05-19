@@ -5,6 +5,8 @@ import adel from "../img/adel.png";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { verifyUser } from "@/utils";
+import Loading from "./Loading";
 
 export default function LoginPage() {
   const router = useRouter()
@@ -31,6 +33,7 @@ export default function LoginPage() {
         password: pass
       })
       if (response.status === 200) {
+        localStorage.setItem('token', JSON.stringify(response.data.token))
         router.push('/home')
       }
     } catch (error) {
@@ -55,19 +58,16 @@ export default function LoginPage() {
     }
   }, [email, pass])
 
+  useEffect(() => {
+    const isTokenExist = JSON.parse(localStorage.getItem('token'))
+    console.log('isTokenExist', isTokenExist)
+    if (isTokenExist && verifyUser(isTokenExist)) {
+      router.push('/home')
+    }
+  }, [])
+
   if (isLoading) {
-    return (
-      <Box
-        className="pageContainer"
-        display="flex"
-        justifyContent='center'
-        flexDirection="column"
-      >
-        <Box display='flex' justifyContent='center'>
-          <CircularProgress color="info" size={80} />
-        </Box>
-      </Box>
-    )
+    return <Loading />
   } else {
     return (
       <Box
