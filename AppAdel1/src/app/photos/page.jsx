@@ -5,7 +5,9 @@ export default function Photos() {
         <Box
             className="pageContainer"
         >
+            
             <Typography variant='h2' color='white'>Página das Fotos</Typography>
+            
         </Box>
       );
 }
