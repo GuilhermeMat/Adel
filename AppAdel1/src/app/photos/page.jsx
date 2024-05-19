@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Box } from '@mui/material';
 
 const photos = () => {
     const [photos, setPhotos] = useState([]);
@@ -27,16 +28,20 @@ const photos = () => {
     }, []);
   
     return (
-      <div>
-        <h1 style={{textAlign:"center"}}>Fotos do Flickr</h1>
-        <div style={{ display: 'flex', flexWrap: 'wrap'}}>
-          {photos.map(photo => (
-            <div key={photo.id} style={{ margin: 10, alignItems:'center' }}>
-              <img src={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} alt={photo.title}  style={{width:'100%'}}/>
+        <Box
+            className="pageContainer"
+        >
+        <div>
+            <h1 style={{textAlign:"center", color:"white"}}>Fotos do Flickr</h1>
+            <div style={{ display: 'flex', flexWrap: 'wrap'}}>
+            {photos.map(photo => (
+                <div key={photo.id} style={{ margin: 10, alignItems:'center' }}>
+                <img src={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} alt={photo.title}  style={{width:'100%'}}/>
+                </div>
+            ))}
             </div>
-          ))}
         </div>
-      </div>
+      </Box>
     );
   };  
   
