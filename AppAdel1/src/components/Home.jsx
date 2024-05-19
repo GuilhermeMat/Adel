@@ -12,10 +12,26 @@ import grupo from "../img/grupo.png";
 import ministerio from "../img/ministerio.png";
 import agenda from "../img/agenda.png";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { authentication } from "@/auth";
+import Loading from "./Loading";
 
 
 function Home() {
+  const [isLoading, setIsLoading] = useState(true)
   const router = useRouter();
+
+  useEffect(() => {
+    const isAuthenticated = authentication()
+    if (isAuthenticated) {
+      localStorage.clear()
+      router.push(isAuthenticated)
+      return
+    }
+    setIsLoading(false)
+  }, [])
+
+  if (isLoading) return <Loading />
 
   return (
     <div className="pageContainer">
@@ -117,4 +133,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Home

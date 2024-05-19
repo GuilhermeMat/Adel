@@ -1,15 +1,18 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Box, Button, CircularProgress, InputBase, Typography } from "@mui/material";
+import { Alert, Box, Button, CircularProgress, InputBase, Slide, Typography } from "@mui/material";
 import adel from "../img/adel.png";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { verifyUser } from "@/utils";
+import Loading from "./Loading";
 
 export default function LoginPage() {
   const router = useRouter()
   const [email, setEmail] = useState("");
   const [button, setButton] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [visibility, setVisibility] = useState(false);
   const [pass, setPass] = useState("");
@@ -30,10 +33,19 @@ export default function LoginPage() {
         password: pass
       })
       if (response.status === 200) {
+        localStorage.setItem('token', JSON.stringify(response.data.token))
         router.push('/home')
       }
     } catch (error) {
       console.log('error', error)
+      if (error.response.status === 404 || error.response.status === 400) {
+        setErrorMsg('Email ou senha incorretos')
+        setTimeout(() => {
+          setErrorMsg('')
+        }, 3000)
+      }
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -46,19 +58,16 @@ export default function LoginPage() {
     }
   }, [email, pass])
 
+  useEffect(() => {
+    const isTokenExist = JSON.parse(localStorage.getItem('token'))
+    console.log('isTokenExist', isTokenExist)
+    if (isTokenExist && verifyUser(isTokenExist)) {
+      router.push('/home')
+    }
+  }, [])
+
   if (isLoading) {
-    return (
-      <Box
-        className="pageContainer"
-        display="flex"
-        justifyContent='center'
-        flexDirection="column"
-      >
-        <Box display='flex' justifyContent='center'>
-          <CircularProgress color="info" size={80} />
-        </Box>
-      </Box>
-    )
+    return <Loading />
   } else {
     return (
       <Box
@@ -67,6 +76,29 @@ export default function LoginPage() {
         justifyContent='center'
         flexDirection="column"
       >
+        { errorMsg && (
+        <Slide
+          direction='down'
+          in={!!errorMsg}
+          timeout={800}
+          hidden={errorMsg === ''}
+          mountOnEnter
+          unmountOnExit
+          style={{
+            position: 'absolute',
+            top: "30px",
+            left: "65px",
+            transform: 'translate(-50%, -50%)',
+            zIndex: 1,
+          }}
+        >
+          <Alert
+            severity="error"
+          >
+            { errorMsg }
+          </Alert>
+        </Slide>
+      ) }
         <Box className="logo">
           <img className="logologin" src={adel.src} alt="" />
         </Box>
