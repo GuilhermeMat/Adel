@@ -49,7 +49,7 @@ export default function ResgisterPage() {
     } else {
       setButton(true);
     }
-  }, [email, pass, name]);
+  }, [email, pass, name]); 
 
   return (
     <Box
