@@ -7,7 +7,7 @@ export default function ResgisterPage() {
             className="pageContainer"
         >
             <Typography variant='h2' color='white'>Página do Registro</Typography>
-    
+        
         </Box>
       );
 }
