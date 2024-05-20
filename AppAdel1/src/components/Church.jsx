@@ -1,12 +1,13 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Box, Typography } from '@mui/material'
 import { authentication } from '@/auth'
 import { useRouter } from 'next/navigation'
 import Loading from './Loading'
+import { useLoadingContext } from '@/context/LoadingContext'
 
 function Church() {
-  const [isLoading, setIsLoading] = useState(true)
+  const { isLoading, setGlobalLoading } = useLoadingContext()
   const router = useRouter()
 
   useEffect(() => {
@@ -16,7 +17,7 @@ function Church() {
       router.push(isAuthenticated)
       return
     }
-    setIsLoading(false)
+    setGlobalLoading(false)
   }, [])
 
   if (isLoading) return <Loading />
