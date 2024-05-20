@@ -44,7 +44,6 @@ export default function LoginPage() {
           setErrorMsg('')
         }, 3000)
       }
-    } finally {
       setIsLoading(false)
     }
   }

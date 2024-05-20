@@ -15,37 +15,61 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { authentication } from "@/auth";
 import Loading from "./Loading";
-
+import {
+  Collapse,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
+import { AccountCircle, StarBorder } from "@material-ui/icons";
 
 function Home() {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
+  const [open, setOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    const isAuthenticated = authentication()
+    const isAuthenticated = authentication();
     if (isAuthenticated) {
-      localStorage.clear()
-      router.push(isAuthenticated)
-      return
+      localStorage.clear();
+      router.push(isAuthenticated);
+      return;
     }
-    setIsLoading(false)
-  }, [])
+    setIsLoading(false);
+  }, []);
 
-  if (isLoading) return <Loading />
+  if (isLoading) return <Loading />;
 
   return (
     <div className="pageContainer">
       <div className="nav">
-        <div onClick={() => {
-          router.push('/settings')
-        }} className="config">
+        <div
+          onClick={() => {
+            router.push("/settings");
+          }}
+          className="config"
+        >
           <img src={config.src} alt="Configuração" className="imgconfig" />
         </div>
 
-        <div onClick={() => {
-          router.push('/profile')
-        }} className="perfil">
+        <div onClick={() => setOpen(!open)} className="perfil">
           <img src={perfil.src} alt="Perfil" className="imgperfil" />
+          <Collapse
+            in={open}
+            timeout="auto"
+            unmountOnExit
+            sx={{ position: 'absolute', left: '50%', top: '6%' }}
+          >
+            <List sx={{ backgroundColor: 'white' }} component="div" disablePadding>
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <AccountCircle />
+                </ListItemIcon>
+                <ListItemText primary="Teste Perfil" />
+              </ListItemButton>
+            </List>
+          </Collapse>
         </div>
       </div>
 
@@ -55,47 +79,63 @@ function Home() {
 
       <div className="icons">
         <div className="icones">
-          <div onClick={() => {
-            router.push("/church");
-          }}>
+          <div
+            onClick={() => {
+              router.push("/church");
+            }}
+          >
             <img className="pagigreja" src={igreja.src} alt="Igreja" />
-            <p style={{color:'white'}}>Igreja</p>
+            <p style={{ color: "white" }}>Igreja</p>
           </div>
 
-          <div onClick={() => {
-            router.push("/ministry");
-          }}>
-            <img className="pagministerio" src={ministerio.src} alt="Ministerio" />
-            <p style={{color:'white'}}>Ministério</p>
+          <div
+            onClick={() => {
+              router.push("/ministry");
+            }}
+          >
+            <img
+              className="pagministerio"
+              src={ministerio.src}
+              alt="Ministerio"
+            />
+            <p style={{ color: "white" }}>Ministério</p>
           </div>
 
-          <div onClick={() => {
-            router.push('/news')
-          }} >
+          <div
+            onClick={() => {
+              router.push("/news");
+            }}
+          >
             <img className="pagnoticia" src={noticia.src} alt="Notícias" />
-            <p style={{color:'white'}}>Notícias</p>
+            <p style={{ color: "white" }}>Notícias</p>
           </div>
         </div>
         <div className="icones">
-          <div onClick={() => {
-            router.push("/bible");
-          }} >
+          <div
+            onClick={() => {
+              router.push("/bible");
+            }}
+          >
             <img className="pagbiblia" src={biblia.src} alt="Bíblia" />
-            <p style={{color:'white'}}>Bíblia</p>
+            <p style={{ color: "white" }}>Bíblia</p>
           </div>
 
-          <div onClick={() => {
-            router.push('/prayer')
-          }} >
+          <div
+            onClick={() => {
+              router.push("/prayer");
+            }}
+          >
             <img className="pagoracao" src={oracao.src} alt="Oração" />
-            <p style={{color:'white'}}>Oração</p>
+            <p style={{ color: "white" }}>Oração</p>
           </div>
 
-          <div onClick={() => {
-            router.push('/photos')
-          }} >
+          <div
+            onClick={() => {
+              router.push("/photos");
+            }}
+          >
             <img className="pagfoto" src={foto.src} alt="Fotos" />
-            <p style={{color:'white'}}>Fotos</p>
+            <p style={{ color: "white" }}>Fotos</p>
           </div>
         </div>
         <div className="icones">
@@ -106,23 +146,31 @@ function Home() {
             href="https://www.instagram.com/adelparquealvoradai/"
           >
             <div>
-              <img className="paginstagram" src={instagram.src} alt="Instagram" />
-              <p style={{color:'white'}}>Instagram</p>
+              <img
+                className="paginstagram"
+                src={instagram.src}
+                alt="Instagram"
+              />
+              <p style={{ color: "white" }}>Instagram</p>
             </div>
           </a>
 
-          <div onClick={() => {
-            router.push('/pgi')
-          }} >
+          <div
+            onClick={() => {
+              router.push("/pgi");
+            }}
+          >
             <img className="paggrupo" src={grupo.src} alt="PGI" />
-            <p style={{color:'white'}}>PGI</p>
+            <p style={{ color: "white" }}>PGI</p>
           </div>
 
-          <div onClick={() => {
-            router.push('/schedule')
-          }} >
+          <div
+            onClick={() => {
+              router.push("/schedule");
+            }}
+          >
             <img className="pagagenda" src={agenda.src} alt="Agenda" />
-            <p style={{color:'white'}}>Agenda</p>
+            <p style={{ color: "white" }}>Agenda</p>
           </div>
         </div>
       </div>
@@ -133,4 +181,4 @@ function Home() {
   );
 }
 
-export default Home
+export default Home;
