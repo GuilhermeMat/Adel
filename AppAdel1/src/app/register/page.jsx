@@ -36,6 +36,7 @@ export default function ResgisterPage() {
         password: pass
       })
       if (response.status === 200) {
+        localStorage.setItem('token', JSON.stringify(response.data.token))
         router.push('/home')
       }
     } catch (error) {
