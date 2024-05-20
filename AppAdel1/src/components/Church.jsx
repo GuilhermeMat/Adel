@@ -11,30 +11,27 @@ function Church() {
   const router = useRouter()
 
   useEffect(() => {
-    const isAuthenticated = authentication()
+    const isAuthenticated = authentication();
     if (isAuthenticated) {
-      localStorage.clear()
-      router.push(isAuthenticated)
-      return
+      localStorage.clear();
+      router.push(isAuthenticated);
+      return;
     }
     setGlobalLoading(false)
   }, [])
 
-  if (isLoading) return <Loading />
+  if (isLoading) return <Loading />;
 
   return (
     <Box
       className="pageContainer"
       display="flex"
+      justifyContent="center"
       alignItems="center"
       flexDirection="column"
     >
-      <Typography variant="h2" color="white">
-        Igreja
-      </Typography>
-
       <Box>
-        <Box style={{ margin: "50px" }}>
+        <Box sx={{ textAlign: "center", margin: "0 0 20px 0" }}>
           <Typography color="#fff">Adel - Parque Alvorada 1</Typography>
           <Typography color="#fff">
             Ministério Madureira - Luziânia-GO
@@ -52,15 +49,15 @@ function Church() {
             }}
           ></iframe>
         </Box>
-        <Box>
-          <Box>
+        <Box sx={{ textAlign: "center" }}>
+          <Box style={{ margin: "50px" }}>
             <Typography color="#fff">Pastor - Antônio Marcos</Typography>
             <Typography color="#fff">Pastora - Juliana Bueno</Typography>
           </Box>
         </Box>
       </Box>
     </Box>
-  )
+  );
 }
 
-export default Church
+export default Church;
