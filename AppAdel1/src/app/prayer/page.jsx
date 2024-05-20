@@ -1,12 +1,5 @@
-import { Box, Typography } from "@mui/material";
+import Prayer from "@/components/Prayer";
 
-export default function Prayer() {
-    return (
-        <Box
-            className="pageContainer"
-        >
-            <Typography variant='h2' color='white'>Página da Oração</Typography>
-    
-        </Box>
-      );
+export default function PrayerPage () {
+    return <Prayer />
 }
