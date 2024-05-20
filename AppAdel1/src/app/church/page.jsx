@@ -1,5 +1,10 @@
 import Church from "@/components/Church";
+import { LoadingProvider } from "@/context/LoadingContext";
 
 export default function ChurchPage() {
-  return <Church />;
+  return (
+    <LoadingProvider>
+      <Church />
+    </LoadingProvider>
+  );
 }

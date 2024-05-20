@@ -1,12 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import News from "@/components/News";
+import { LoadingProvider } from "@/context/LoadingContext";
 
-export default function News() {
+export default function NewsPage () {
    return (
-      <Box
-          className="pageContainer"
-      >
-         <Typography variant='h2' color='white'>Página das Notícias</Typography>
-  
-      </Box>
-      ); 
+      <LoadingProvider>
+         <News />
+      </LoadingProvider>
+   )
 }

@@ -1,12 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import Bible from "@/components/Bible";
+import { LoadingProvider } from "@/context/LoadingContext";
 
-export default function Bible() {
-    return (
-        <Box
-            className="pageContainer"
-        >
-            <Typography variant='h2' color='white'>Página da Bíblia</Typography>
-    
-        </Box>
-      );
+export default function BiblePage() {
+  return (
+    <LoadingProvider>
+      <Bible />
+    </LoadingProvider>
+  );
 }

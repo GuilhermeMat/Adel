@@ -1,12 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import Schedule from "@/components/Schedule";
+import { LoadingProvider } from "@/context/LoadingContext";
 
-export default function Schedule() {
-    return (
-        <Box
-            className="pageContainer"
-        >
-            <Typography variant='h2' color='white'>Página da agenda</Typography>
-    
-        </Box>
-      );
+export default function SchedulePage() {
+  return (
+    <LoadingProvider>
+      <Schedule />
+    </LoadingProvider>
+  );
 }
