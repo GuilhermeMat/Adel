@@ -1,5 +1,10 @@
 import News from "@/components/News";
+import { LoadingProvider } from "@/context/LoadingContext";
 
 export default function NewsPage () {
-   return <News />
+   return (
+      <LoadingProvider>
+         <News />
+      </LoadingProvider>
+   )
 }

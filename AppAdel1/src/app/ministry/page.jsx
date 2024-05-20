@@ -1,5 +1,10 @@
 import Ministry from "@/components/Ministry";
+import { LoadingProvider } from "@/context/LoadingContext";
 
 export default function MinistryPage () {
-  return <Ministry />;
+  return (
+    <LoadingProvider>
+      <Ministry />
+    </LoadingProvider>
+  );
 }
