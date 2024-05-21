@@ -1,6 +1,13 @@
 "use client";
 import { Create, Visibility, VisibilityOff } from "@material-ui/icons";
-import { Box, Button, InputBase, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  InputBase,
+  Slide,
+  Typography,
+} from "@mui/material";
 import adel from "../img/adel.png";
 import { useEffect, useState } from "react";
 import { authentication } from "@/auth";
@@ -16,26 +23,38 @@ export default function Profile() {
   const [disableName, setDisableName] = useState(true);
   const [visibility, setVisibility] = useState(false);
   const [pass, setPass] = useState("");
+  const [updateInfo, setUpdateInfo] = useState(["", ""]);
   const [disablePass, setDisablePass] = useState(true);
-  const [originalInfos, setOriginalInfos] = useState({})
+  const [originalInfos, setOriginalInfos] = useState({});
+  const [allInfosInvalid, setAllInfosInvalid] = useState(true);
   const { setGlobalLoading, isLoading } = useLoadingContext();
   const router = useRouter();
 
   const fillUserInfos = () => {
-    const token = JSON.parse(localStorage.getItem('token'))
-    const decoded = decodeUser(token)
-    setName(decoded.name)
-    setEmail(decoded.email)
+    const token = JSON.parse(localStorage.getItem("token"));
+    const decoded = decodeUser(token);
+    setName(decoded.name);
+    setEmail(decoded.email);
     const originalData = {
       name: decoded.name,
-      email: decoded.email
-    }
-    setOriginalInfos(originalData)
-  }
+      email: decoded.email,
+    };
+    setOriginalInfos(originalData);
+  };
 
   const compareData = () => {
-
-  }
+    const obj = {};
+    if (email.toLocaleLowerCase() !== originalInfos.email.toLocaleLowerCase()) {
+      obj.email = email;
+    }
+    if (pass.length) {
+      obj.password = pass;
+    }
+    if (name.toLocaleLowerCase() !== originalInfos.name.toLocaleLowerCase()) {
+      obj.nickName = name;
+    }
+    return obj;
+  };
 
   useEffect(() => {
     const isAuthenticated = authentication();
@@ -44,7 +63,7 @@ export default function Profile() {
       router.push(isAuthenticated);
       return;
     }
-    fillUserInfos()
+    fillUserInfos();
     setGlobalLoading(false);
   }, []);
 
@@ -61,10 +80,33 @@ export default function Profile() {
   };
 
   const updateInfos = () => {
-    const cleanObj = compareData()
+    const cleanObj = compareData();
+    console.log("cleanObj", cleanObj);
+    const keys = Object.keys(cleanObj);
+    console.log('keys', keys)
+    if (!keys.length) {
+      setUpdateInfo(["Informações iguas as anteriores", "info"]);
+    } else {
+      setUpdateInfo(
+        keys > 1
+          ? ["Dados atualizados com sucesso!", "success"]
+          : ["Dado Atualizado com sucesso", "success"]
+      );
+    }
+    setTimeout(() => {
+      setUpdateInfo(['', ''])
+    }, 2000)
   };
 
-  if (isLoading) return <Loading />
+  useEffect(() => {
+    if (!disableEmail || !disableName || !disablePass) {
+      setAllInfosInvalid(false);
+    } else {
+      setAllInfosInvalid(true);
+    }
+  }, [disableEmail, disableName, disablePass]);
+
+  if (isLoading) return <Loading />;
 
   return (
     <Box
@@ -73,6 +115,25 @@ export default function Profile() {
       justifyContent="center"
       flexDirection="column"
     >
+      {updateInfo[0].length && updateInfo[1].length && (
+        <Slide
+          direction="down"
+          in={!!updateInfo}
+          timeout={800}
+          hidden={updateInfo === ""}
+          mountOnEnter
+          unmountOnExit
+          style={{
+            position: "absolute",
+            top: "30px",
+            left: "65px",
+            transform: "translate(-50%, -50%)",
+            zIndex: 1,
+          }}
+        >
+          <Alert severity="success">{updateInfo[0]}</Alert>
+        </Slide>
+      )}
       <Box className="logo">
         <img className="logologin" src={adel.src} alt="" />
       </Box>
@@ -164,7 +225,7 @@ export default function Profile() {
         />
       </Box>
       <Button
-        disabled
+        disabled={allInfosInvalid}
         onClick={updateInfos}
         sx={{
           display: "flex",
