@@ -1,22 +1,84 @@
 "use client";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
 
-const axios = require('axios');
+const BibleAPI = {
+  baseUrl: 'https://api.scripture.api.bible/v1/swagger.json',
+  apiKey: '6972de356be860b3e5835f72a5590194',
+};
 
-// URL da API da Bíblia
-const apiUrl = 'https://bible-api.com/john%203:16?translation=almeida';
+const BibleSearch = () => {
+  const [book, setBook] = useState('');
+  const [chapter, setChapter] = useState('');
+  const [verse, setVerse] = useState('');
+  const [searchResult, setSearchResult] = useState(null);
+  const [error, setError] = useState(null);
 
-// Função para fazer a solicitação à API da Bíblia
-async function getBibleVerse() {
+  const handleBookChange = (event) => {
+    setBook(event.target.value);
+  };
+
+  const handleChapterChange = (event) => {
+    setChapter(event.target.value);
+  };
+
+  const handleVerseChange = (event) => {
+    setVerse(event.target.value);
+  };
+
+  const handleSearch = async () => {
     try {
-        const response = await axios.get(apiUrl);
-        // Se a solicitação for bem-sucedida, você pode acessar os dados da resposta
-        console.log(response.data);
+      const response = await axios.get(
+        `${BibleAPI.baseUrl}/bibles/verse`,
+        {
+          headers: {
+            'api-key': BibleAPI.apiKey,
+          },
+          params: {
+            bookId: book,
+            chapter,
+            verse,
+          },
+        }
+      );
+      setSearchResult(response.data);
+      setError(null);
     } catch (error) {
-        // Se houver algum erro na solicitação, você pode lidar com ele aqui
-        console.error('Erro ao obter versículo da Bíblia:', error);
+      setSearchResult(null);
+      setError('Erro ao buscar o versículo. Por favor, tente novamente.');
     }
-}
+  };
 
-// Chamar a função para obter um versículo da Bíblia
-getBibleVerse();
+  return (
+    <div>
+      <input
+        type="text"
+        value={book}
+        onChange={handleBookChange}
+        placeholder="Digite o nome do livro"
+      />
+      <input
+        type="number"
+        value={chapter}
+        onChange={handleChapterChange}
+        placeholder="Digite o número do capítulo"
+      />
+      <input
+        type="number"
+        value={verse}
+        onChange={handleVerseChange}
+        placeholder="Digite o número do versículo"
+      />
+      <button onClick={handleSearch}>Pesquisar</button>
+      {error && <p>{error}</p>}
+      {searchResult && (
+        <div>
+          <h3>Versículo Encontrado:</h3>
+          <p>{searchResult.text}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default BibleSearch;
