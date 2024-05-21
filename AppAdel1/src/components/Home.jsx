@@ -1,7 +1,6 @@
 "use client";
 import logo from "../img/adel.png";
 import config from "../img/configuracao.png";
-import perfil from "../img/usuario.png";
 import igreja from "../img/igreja.png";
 import noticia from "../img/noticia.png";
 import biblia from "../img/biblia.png";
