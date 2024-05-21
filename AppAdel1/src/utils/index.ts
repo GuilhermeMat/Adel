@@ -9,3 +9,12 @@ export const verifyUser = (token: string): boolean => {
     return false
   }
 }
+
+export const decodeUser = (token: string) => {
+  try {
+    const decoded = jwt.decode(token)
+    return decoded
+  } catch (error) {
+    console.log('error', error)
+  }
+}
