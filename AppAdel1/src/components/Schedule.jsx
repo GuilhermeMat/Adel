@@ -1,10 +1,24 @@
-'use client'
+"use client";
 import { authentication } from "@/auth";
 import { useLoadingContext } from "@/context/LoadingContext";
-import { Box, Typography } from "@mui/material";
+import {
+  Box,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Loading from "./Loading";
+
+function createData(dia, evento, hora) {
+  return { dia, evento, hora };
+}
 
 export default function Schedule() {
   const { isLoading, setGlobalLoading } = useLoadingContext();
@@ -21,11 +35,56 @@ export default function Schedule() {
   }, []);
 
   if (isLoading) return <Loading />;
+
+  const rows = [
+    createData("Terça-feira", "PGI", "19h30"),
+    createData("Quarta-feira", "Culto de ensino", "19h30"),
+    createData("Sábado", "Culto de departamento", "19h30"),
+    createData("Domingo", "Culto da família", "19h30"),
+  ];
+
   return (
-    <Box className="pageContainer">
-      <Typography variant="h2" color="white">
-        Página da agenda
-      </Typography>
+    <Box
+      className="pageContainer"
+      sx={{
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
+      <TableContainer
+        sx={{
+          margin: "0 25px 0 25px",
+        }}
+        component={Paper}
+      >
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell sx={{ fontWeight: "800" }} align="center">
+                Dia
+              </TableCell>
+              <TableCell sx={{ fontWeight: "800" }} align="center">
+                Evento
+              </TableCell>
+              <TableCell sx={{ fontWeight: "800" }} align="center">
+                Horário
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow
+                key={row.dia}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell align="center">{row.dia}</TableCell>
+                <TableCell align="center">{row.evento}</TableCell>
+                <TableCell align="center">{row.hora}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Box>
   );
 }
