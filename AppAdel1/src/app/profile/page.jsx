@@ -60,7 +60,7 @@ export default function Profile() {
           placeholder="Alterar Nome"
         />
       </Box>
-      <span style={{ margin: "0 0 8px 10%", color: "white" }}>Email</span>
+      <span style={{ margin: "8px 0 8px 10%", color: "white" }}>Email</span>
       <Box display="flex" justifyContent="center">
         <InputBase
           endAdornment={

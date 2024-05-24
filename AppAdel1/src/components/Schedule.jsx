@@ -49,12 +49,27 @@ export default function Schedule() {
       sx={{
         display: "flex",
         alignItems: "center",
+        flexDirection:"column",
+        padding: "0 10px 0 10px"
       }}
     >
+      <Box sx={{
+        height:"60vh",
+        display:"flex",
+        flexDirection:"column",
+        justifyContent:"space-between"
+      }}>
+      <Box sx={{
+        textAlign:"center",
+        marginTop:"20px"
+      }}>
+        <Typography variant="h3" fontWeight={800} sx={{
+          color:"white",
+        }}>
+          Agenda
+        </Typography>
+      </Box>
       <TableContainer
-        sx={{
-          margin: "0 25px 0 25px",
-        }}
         component={Paper}
       >
         <Table aria-label="simple table">
@@ -85,6 +100,7 @@ export default function Schedule() {
           </TableBody>
         </Table>
       </TableContainer>
+      </Box>
     </Box>
   );
 }
