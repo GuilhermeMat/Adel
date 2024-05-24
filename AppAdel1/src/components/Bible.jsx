@@ -63,7 +63,7 @@ const BibleSearch = () => {
   };
 
   return (
-    <div>
+    <div className='pageContainer'>
       <input
         type="text"
         value={book}
