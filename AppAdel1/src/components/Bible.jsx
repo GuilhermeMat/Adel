@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const BibleAPI = {
-  baseUrl: 'https://api.scripture.api.bible/v1/swagger.json',
-  apiKey: '6972de356be860b3e5835f72a5590194',
-};
+// const BibleAPI = {
+//   baseUrl: ``,
+//   apiKey: `${process.env.NEXT_PUBLIC_BIBLE_KEY}`,
+// };
 
 const BibleSearch = () => {
   const [book, setBook] = useState('');
@@ -13,6 +13,19 @@ const BibleSearch = () => {
   const [verse, setVerse] = useState('');
   const [searchResult, setSearchResult] = useState(null);
   const [error, setError] = useState(null);
+  
+  const getBible = async () => {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_BIBLE_BASE_URL}/versions/#d63894c8d9a7a503-01/books.xml`, {
+      headers: {
+        "api-key": `${process.env.NEXT_PUBLIC_BIBLE_KEY}`,
+      }
+    })
+    console.log(response)
+  }
+
+  useEffect(() => {
+    getBible()
+  },[])
 
   const handleBookChange = (event) => {
     setBook(event.target.value);
