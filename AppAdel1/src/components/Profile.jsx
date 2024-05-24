@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { useLoadingContext } from "@/context/LoadingContext";
 import Loading from "./Loading";
 import { decodeUser } from "@/utils";
+import { updateUser } from "@/service/userAPI";
 
 export default function Profile() {
   const [email, setEmail] = useState("");
@@ -79,14 +80,22 @@ export default function Profile() {
     setPass(event.target.value);
   };
 
-  const updateInfos = () => {
+  const resetFields = () => {
+    setDisableEmail(true);
+    setDisableName(true);
+    setDisablePass(true);
+  }
+
+  const updateInfos = async () => {
     const cleanObj = compareData();
-    console.log("cleanObj", cleanObj);
     const keys = Object.keys(cleanObj);
-    console.log('keys', keys)
     if (!keys.length) {
       setUpdateInfo(["Informações iguas as anteriores", "info"]);
     } else {
+      const response = await updateUser(cleanObj)
+      if (response.status === 200)
+      resetFields()
+      localStorage.setItem('token', JSON.stringify(response.data.token))
       setUpdateInfo(
         keys > 1
           ? ["Dados atualizados com sucesso!", "success"]

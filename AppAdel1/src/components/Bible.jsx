@@ -1,31 +1,31 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-
-// const BibleAPI = {
-//   baseUrl: ``,
-//   apiKey: `${process.env.NEXT_PUBLIC_BIBLE_KEY}`,
-// };
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const BibleSearch = () => {
-  const [book, setBook] = useState('');
-  const [chapter, setChapter] = useState('');
-  const [verse, setVerse] = useState('');
+  const [book, setBook] = useState("");
+  const [chapter, setChapter] = useState("");
+  const [verse, setVerse] = useState("");
   const [searchResult, setSearchResult] = useState(null);
   const [error, setError] = useState(null);
-  
+
   const getBible = async () => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_BIBLE_BASE_URL}/versions/#d63894c8d9a7a503-01/books.xml`, {
-      headers: {
-        "api-key": `${process.env.NEXT_PUBLIC_BIBLE_KEY}`,
-      }
-    })
-    console.log(response)
-  }
+    // const response = await axios.get(
+    //   `${process.env.NEXT_PUBLIC_BIBLE_BASE_URL}/#d63894c8d9a7a503-01`,
+    //   {
+    //     headers: {
+    //       "api-key": `${process.env.NEXT_PUBLIC_BIBLE_KEY}`,
+    //     },
+    //   }
+    // );
+    // console.log(response.data.data[167]);
+    const response = await axios.get('https://bible-api.com/apocalipse1?translation=almeida');
+    console.log(response);
+  };
 
   useEffect(() => {
-    getBible()
-  },[])
+    getBible();
+  }, []);
 
   const handleBookChange = (event) => {
     setBook(event.target.value);
@@ -41,24 +41,21 @@ const BibleSearch = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(
-        `${BibleAPI.baseUrl}/bibles/verse`,
-        {
-          headers: {
-            'api-key': BibleAPI.apiKey,
-          },
-          params: {
-            bookId: book,
-            chapter,
-            verse,
-          },
-        }
-      );
+      const response = await axios.get(`${BibleAPI.baseUrl}/bibles/verse`, {
+        headers: {
+          "api-key": BibleAPI.apiKey,
+        },
+        params: {
+          bookId: book,
+          chapter,
+          verse,
+        },
+      });
       setSearchResult(response.data);
       setError(null);
     } catch (error) {
       setSearchResult(null);
-      setError('Erro ao buscar o versículo. Por favor, tente novamente.');
+      setError("Erro ao buscar o versículo. Por favor, tente novamente.");
     }
   };
 
