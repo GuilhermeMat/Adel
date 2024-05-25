@@ -4,11 +4,13 @@ import React from 'react'
 export default function Loading() {
   return (
     <Box
-      className="pageContainer"
       display="flex"
       alignItems='center'
       justifyContent='center'
       flexDirection="column"
+      sx={{
+        height: '80vh'
+      }}
     >
       <CircularProgress color="info" size="50px" />
     </Box>

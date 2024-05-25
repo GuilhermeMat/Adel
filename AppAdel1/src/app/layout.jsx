@@ -1,7 +1,7 @@
 import "../styles/index.css";
 import "../styles/login.css";
 import "../styles/home.css";
-import Header from "@/components/Header";
+import ClientLayout from "@/components/ClientLayout";
 
 export const metadata = {
   title: "Adel App",
@@ -9,12 +9,12 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
       <body>
         <div className="pageContainer">
-          <Header />
-          {children}
+          <ClientLayout>{children}</ClientLayout>
         </div>
       </body>
     </html>

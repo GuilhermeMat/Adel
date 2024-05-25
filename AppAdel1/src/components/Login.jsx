@@ -84,6 +84,9 @@ export default function LoginPage() {
         display="flex"
         justifyContent="center"
         flexDirection="column"
+        sx={{
+          height: "99.5vh",
+        }}
       >
         {errorMsg && (
           <Slide

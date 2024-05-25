@@ -2,7 +2,7 @@
 import { authentication } from "@/auth";
 import { decodeUser } from "@/utils";
 import { ExitToApp, Person } from "@material-ui/icons";
-import { Box, Collapse, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Collapse, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import config from "../img/configuracao.png"
 import React, { useEffect, useState } from "react";
@@ -40,14 +40,16 @@ export default function Header() {
 
   return (
     <Box className="nav">
-      <div
+      <Button
         onClick={() => {
           router.push("/settings");
         }}
+        disabled={nameInitials === 'US'}
         className="config"
+        sx={{ marginTop: '-5px' }}
       >
         <img src={config.src} alt="Configuração" className="imgconfig" />
-      </div>
+      </Button>
       <Box sx={{ display: "flex" }}>
         <Box sx={{ right: 15, top: 50, position: "absolute" }}>
           <Collapse
@@ -105,7 +107,6 @@ export default function Header() {
             zIndex: 2,
           }}
         >
-          {/* <img src={perfil.src} alt="Perfil" className="imgperfil" /> */}
           <Box
             sx={{
               backgroundColor: "white",
@@ -125,7 +126,9 @@ export default function Header() {
                 fontWeight: "600",
               }}
             >
-              {nameInitials}
+              {nameInitials === 'US' ? (
+                <CircularProgress sx={{ color: 'black' }} size={18} />
+              ) : nameInitials}
             </Typography>
           </Box>
         </Box>
