@@ -27,10 +27,9 @@ export default function Ministry() {
   if (isLoading) return <Loading />
 
   return (
-    <Box className="pageContainer">
+    <Box>
       <Box 
         sx={{overflow:"auto"}}
-        className="pageContainer"
         display="flex"
         alignItems="center"
         flexDirection="column"

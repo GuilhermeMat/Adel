@@ -22,7 +22,7 @@ export default function Prayer() {
 
   if (isLoading) return <Loading />;
   return (
-    <Box className="pageContainer">
+    <Box>
       <Typography variant="h2" color="white">
         Página da Oração
       </Typography>

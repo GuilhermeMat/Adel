@@ -81,7 +81,6 @@ export default function LoginPage() {
   } else {
     return (
       <Box
-        className="pageContainer"
         display="flex"
         justifyContent="center"
         flexDirection="column"
