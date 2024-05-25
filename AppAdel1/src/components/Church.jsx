@@ -24,7 +24,6 @@ function Church() {
 
   return (
     <Box
-      className="pageContainer"
       display="flex"
       justifyContent="center"
       alignItems="center"

@@ -28,7 +28,6 @@ export default function Pgi() {
     return (
         <Box 
         sx={{overflow:"auto"}}
-        className="pageContainer"
         display="flex"
         alignItems="center"
         flexDirection="column"

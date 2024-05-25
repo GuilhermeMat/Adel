@@ -119,7 +119,6 @@ export default function Profile() {
 
   return (
     <Box
-      className="pageContainer"
       display="flex"
       justifyContent="center"
       flexDirection="column"

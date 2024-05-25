@@ -23,9 +23,7 @@ export default function News() {
   if (isLoading) return <Loading />
 
    return (
-      <Box
-          className="pageContainer"
-      >
+      <Box>
          <Typography variant='h2' color='white'>Página das Notícias</Typography>
   
       </Box>

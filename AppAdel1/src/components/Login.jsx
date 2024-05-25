@@ -81,10 +81,12 @@ export default function LoginPage() {
   } else {
     return (
       <Box
-        className="pageContainer"
         display="flex"
         justifyContent="center"
         flexDirection="column"
+        sx={{
+          height: "99.5vh",
+        }}
       >
         {errorMsg && (
           <Slide

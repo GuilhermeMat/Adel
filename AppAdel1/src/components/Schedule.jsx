@@ -45,7 +45,6 @@ export default function Schedule() {
 
   return (
     <Box
-      className="pageContainer"
       sx={{
         display: "flex",
         alignItems: "center",

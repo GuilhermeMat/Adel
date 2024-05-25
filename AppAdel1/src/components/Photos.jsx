@@ -31,7 +31,7 @@ const Photos = () => {
   }, []);
 
   return (
-    <Box className="pageContainer">
+    <Box>
       <div>
         <h1 style={{ textAlign: "center", color: "white" }}>Fotos do Flickr</h1>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
