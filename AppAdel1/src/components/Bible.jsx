@@ -1,6 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Box, Typography } from "@mui/material";
+import { booksOfBible } from "@/service/bibleInfos";
+import BookCard from "./BookCard";
+import { useLoadingContext } from "@/context/LoadingContext";
+import Loading from "./Loading";
+import { authentication } from "@/auth";
 
 const BibleSearch = () => {
   const [book, setBook] = useState("");
@@ -8,23 +14,34 @@ const BibleSearch = () => {
   const [verse, setVerse] = useState("");
   const [searchResult, setSearchResult] = useState(null);
   const [error, setError] = useState(null);
+  const { isLoading, setGlobalLoading } = useLoadingContext();
 
   const getBible = async () => {
-    // const response = await axios.get(
-    //   `${process.env.NEXT_PUBLIC_BIBLE_BASE_URL}/#d63894c8d9a7a503-01`,
-    //   {
-    //     headers: {
-    //       "api-key": `${process.env.NEXT_PUBLIC_BIBLE_KEY}`,
-    //     },
-    //   }
-    // );
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_BIBLE_BASE_URL}/books`,
+      {
+        headers: {
+          "api-key": `${process.env.NEXT_PUBLIC_BIBLE_KEY}`,
+        },
+      }
+    );
     // console.log(response.data.data[167]);
-    const response = await axios.get('https://bible-api.com/apocalipse1?translation=almeida');
+    // const response = await axios.get('https://bible-api.com/apocalipse1?translation=almeida');
     console.log(response);
   };
 
   useEffect(() => {
     getBible();
+  }, []);
+
+  useEffect(() => {
+    const isAuthenticated = authentication();
+    if (isAuthenticated) {
+      localStorage.clear();
+      router.push(isAuthenticated);
+      return;
+    }
+    setGlobalLoading(false);
   }, []);
 
   const handleBookChange = (event) => {
@@ -59,9 +76,21 @@ const BibleSearch = () => {
     }
   };
 
+  if (isLoading) return <Loading />
+
   return (
-    <div>
-      <input
+    <Box
+      sx={{
+        height: "85vh",
+        overflowY: "auto",
+        padding: "10px",
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap'
+      }}
+    >
+      { booksOfBible.map((book) => <BookCard { ...book } />) }
+      {/* <input
         type="text"
         value={book}
         onChange={handleBookChange}
@@ -86,8 +115,8 @@ const BibleSearch = () => {
           <h3>Versículo Encontrado:</h3>
           <p>{searchResult.text}</p>
         </div>
-      )}
-    </div>
+      )} */}
+    </Box>
   );
 };
 
