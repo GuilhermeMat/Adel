@@ -2,17 +2,21 @@
 import { authentication } from "@/auth";
 import { useLoadingContext } from "@/context/LoadingContext";
 import { booksOfBible } from "@/service/bibleInfos";
-import { Box, Button, InputBase, Typography } from "@mui/material";
+import { Alert, Box, Button, InputBase, Slide, Typography } from "@mui/material";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Loading from "./Loading";
 import { requestBibleInfos } from "@/service/bibleAPI";
+import Paragraph from "./Paragraph";
 
 export default function Search() {
   const [bookName, setBookName] = useState();
   const [chapter, setChapter] = useState();
   const [verse, setVerse] = useState();
   const [cannotSearch, setCannotSearch] = useState(true);
+  const [versesList, setVersesList] = useState([]);
+  const [compLoading, setCompLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const { isLoading, setGlobalLoading } = useLoadingContext();
   const params = useParams();
 
@@ -28,25 +32,43 @@ export default function Search() {
     callback(event.target.value);
   };
 
+  const treatVerses = (versesList) => {
+    if (verse) {
+      const findVerse = versesList.filter(
+        (vs) => vs.number >= parseInt(verse, 10)
+      );
+      setVersesList(findVerse);
+      return;
+    }
+    setVersesList(versesList);
+  };
+
   const handleSearch = async () => {
-    const { data } = await requestBibleInfos(bookName.abbrev, chapter)
-    // LOG COM RESULTADO DA BUSCA DO CAPÍTULO DO LIVRO EM ESPECÍFICO
-    console.log('data', data)
-  }
+    setCompLoading(true);
+    setVerse('');
+    setChapter('');
+    const { data, msg } = await requestBibleInfos(bookName.abbrev, chapter);
+    if (msg) {
+      setErrorMsg(msg);
+      setCompLoading(false);
+      return;
+    }
+    treatVerses(data.verses);
+    setCompLoading(false);
+  };
   const getBookName = () => {
     const info = booksOfBible.find((book) => book.abbrev === params.abbrev);
-    console.log("info", info);
     setBookName(info);
     setGlobalLoading(false);
   };
 
   useEffect(() => {
     if (chapter && chapter > 0) {
-      setCannotSearch(false)
+      setCannotSearch(false);
     } else {
-      setCannotSearch(true)
+      setCannotSearch(true);
     }
-  }, [chapter, verse])
+  }, [chapter, verse]);
 
   useEffect(() => {
     const isAuthenticated = authentication();
@@ -62,6 +84,26 @@ export default function Search() {
 
   return (
     <Box>
+      {errorMsg && (
+        <Slide
+          direction="down"
+          in={!!errorMsg}
+          timeout={800}
+          hidden={errorMsg === ""}
+          mountOnEnter
+          unmountOnExit
+          style={{
+            position: "absolute",
+            top: "30px",
+            left: "55px",
+            transform: "translate(-50%, -50%)",
+            zIndex: 2,
+            width: '300px'
+          }}
+        >
+          <Alert severity="error">{errorMsg}</Alert>
+        </Slide>
+      )}
       <Box>
         <Typography variant="h5" sx={{ color: "white", textAlign: "center" }}>
           {bookName.name}
@@ -129,10 +171,29 @@ export default function Search() {
           onClick={handleSearch}
           disabled={cannotSearch}
           variant="outlined"
-          sx={{ border: "1px solid rgba(76, 172, 253, 0.8)", color: 'white' }}
+          sx={{ border: "1px solid rgba(76, 172, 253, 0.8)", color: "white" }}
         >
           Buscar
         </Button>
+      </Box>
+      <Box
+        sx={{
+          margin: "10px 0 0 0",
+          height: "65vh",
+          overflowY: "auto",
+          padding: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        {compLoading ? (
+          <Loading />
+        ) : versesList.length ? (
+          versesList.map((item) => <Paragraph {...item} />)
+        ) : (
+          <Typography sx={{ color: "white" }}>Busque um capítulo...</Typography>
+        )}
       </Box>
     </Box>
   );
