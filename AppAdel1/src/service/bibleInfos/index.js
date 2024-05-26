@@ -23,7 +23,7 @@ export const booksOfBible = [
   { name: 'Cânticos', abbrev: 'ct' },
   { name: 'Isaías', abbrev: 'is' },
   { name: 'Jeremias', abbrev: 'jr' },
-  { name: 'Lamentações de Jeremias', abbrev: 'lm' },
+  { name: 'Lamentações', abbrev: 'lm' },
   { name: 'Ezequiel', abbrev: 'ez' },
   { name: 'Daniel', abbrev: 'dn' },
   { name: 'Oséias', abbrev: 'os' },

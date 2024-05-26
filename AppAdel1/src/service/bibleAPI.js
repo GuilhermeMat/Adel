@@ -8,5 +8,6 @@ export const requestBibleInfos = async (abbrev, chapter) => {
     return response
   } catch (error) {
     console.log('error ao requisitar informações', error)
+    return { msg: 'Erro ao requisitar informações tente novamente mais tarde' }
   }
 }
