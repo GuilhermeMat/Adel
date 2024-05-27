@@ -1,14 +1,17 @@
+import { useLoadingContext } from "@/context/LoadingContext";
 import { Box, Typography } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 
 export default function BookCard({ name, abbrev }) {
+  const { setGlobalLoading } = useLoadingContext()
 
   return (
     <Link
       href={{
         pathname: `bible/search/${abbrev}`,
       }}
+      onClick={() => setGlobalLoading(true)}
     >
       <Box
         id={abbrev}
