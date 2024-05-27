@@ -20,7 +20,7 @@ function Home() {
 
   useEffect(() => {
     const isAuthenticated = authentication();
-    if (isAuthenticated) {
+    if (isAuthenticated === '/') {
       localStorage.clear();
       router.push(isAuthenticated);
       return;
