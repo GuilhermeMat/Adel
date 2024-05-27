@@ -38,18 +38,18 @@ export default function Header() {
     setGlobalLoading(true);
     setOpen(!open);
     localStorage.clear();
+    sessionStorage.clear();
     router.push("/");
   };
 
   useEffect(() => {
     const isAuthenticated = authentication();
-    if (isAuthenticated) {
+    if (isAuthenticated === '/') {
       localStorage.clear();
       router.push(isAuthenticated);
       return;
     }
-    const token = JSON.parse(localStorage.getItem("token"));
-    const { name } = decodeUser(token);
+    const { name } = decodeUser(isAuthenticated);
     setNameInitials(treatUserName(name));
   }, [infosChanged]);
 
