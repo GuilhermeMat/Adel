@@ -29,7 +29,10 @@ export default function Ministry() {
   return (
     <Box>
       <Box 
-        sx={{overflow:"auto"}}
+        sx={{overflow:"auto",
+          height:"85vh",
+          padding:"10px",
+        }}
         display="flex"
         alignItems="center"
         flexDirection="column"
