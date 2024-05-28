@@ -27,12 +27,15 @@ export default function Pgi() {
   if (isLoading) return <Loading />;
     return (
         <Box 
-        sx={{overflow:"auto"}}
         display="flex"
         alignItems="center"
         flexDirection="column"
         >
-        <Box>
+        <Box
+          sx={{overflowY:"auto",
+          height: "85vh"
+          }}        
+        >
             <Box style={{margin:"50px"}}>
                 <Typography color='#fff'>Ministério Madureira - Luziânia-GO</Typography>
             </Box>

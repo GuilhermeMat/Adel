@@ -22,7 +22,11 @@ export default function Prayer() {
 
   if (isLoading) return <Loading />;
   return (
-    <Box>
+    <Box
+      sx={{overflowY:"auto",
+          height: "85vh"
+          }} 
+    >
       <Typography variant="h2" color="white">
         Página da Oração
       </Typography>
