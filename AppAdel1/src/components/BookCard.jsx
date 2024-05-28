@@ -7,7 +7,7 @@ export default function BookCard({ name, abbrev }) {
   const { setGlobalLoading } = useLoadingContext()
 
   return (
-    <Link
+    <Link style={{textDecoration:"none"}}
       href={{
         pathname: `bible/search/${abbrev}`,
       }}
