@@ -15,11 +15,6 @@ export const LoadingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     setIsLoading(value)
   }
 
-  useEffect(() => {
-    console.log('Provider')
-    console.log('isLoading', isLoading)
-  }, [isLoading])
-
   return (
     <LoadingContext.Provider value={{ isLoading, setGlobalLoading }}>
       {children}

@@ -37,7 +37,7 @@ const Photos = () => {
         }}
     >
       <div>
-        <h1 style={{ textAlign: "center", color: "white" }}>Fotos do Flickr</h1>
+        <h1 style={{ textAlign: "center", color: "white" }}>Fotos</h1>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
           {photos.map((photo) => (
             <div key={photo.id} style={{ margin: 10, alignItems: "center" }}>

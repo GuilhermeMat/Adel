@@ -12,9 +12,8 @@ const BibleSearch = () => {
   const { isLoading, setGlobalLoading } = useLoadingContext();
 
   useEffect(() => {
-    console.log('booksOfBible', booksOfBible)
     const isAuthenticated = authentication();
-    if (isAuthenticated) {
+    if (isAuthenticated === '/') {
       localStorage.clear();
       router.push(isAuthenticated);
       return;

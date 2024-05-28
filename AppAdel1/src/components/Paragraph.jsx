@@ -5,7 +5,7 @@ export default function Paragraph({ number, text }) {
   return (
     <Box sx={{ margin: 0.8, width: "85vw" }}>
       <Box>
-        <Typography sx={{ color: "rgba(76, 172, 253, 0.8)", fontWeight: 600 }}>
+        <Typography sx={{ color: "rgba(76, 172, 253, 0.8)", fontWeight: 600, fontSize: 15 }}>
           {number}
         </Typography>
       </Box>

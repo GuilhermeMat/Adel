@@ -1,6 +1,5 @@
 "use client";
 import logo from "../img/adel.png";
-import config from "../img/configuracao.png";
 import igreja from "../img/igreja.png";
 import noticia from "../img/noticia.png";
 import biblia from "../img/biblia.png";
@@ -14,41 +13,18 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { authentication } from "@/auth";
 import Loading from "./Loading";
-import { Box, Collapse, Slide, Typography } from "@mui/material";
-import { AccountCircle, ExitToApp, Person } from "@material-ui/icons";
-import { decodeUser } from "@/utils";
-import Header from "./Header";
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [nameInitials, setNameInitials] = useState("US");
-  const [open, setOpen] = useState(false);
   const router = useRouter();
-
-  const treatUserName = (nick) => {
-    const listName = nick.split(" ");
-    if (listName.length > 1) {
-      return `${listName[0][0]}${listName[1][0]}`;
-    } else {
-      return `${listName[0][0]}`;
-    }
-  };
-
-  const logOut = () => {
-    localStorage.clear();
-    router.push("/");
-  };
 
   useEffect(() => {
     const isAuthenticated = authentication();
-    if (isAuthenticated) {
+    if (isAuthenticated === '/') {
       localStorage.clear();
       router.push(isAuthenticated);
       return;
     }
-    const token = JSON.parse(localStorage.getItem("token"));
-    const { name } = decodeUser(token);
-    setNameInitials(treatUserName(name));
     setIsLoading(false);
   }, []);
 
@@ -64,6 +40,7 @@ function Home() {
         <div className="icones">
           <div
             onClick={() => {
+              setIsLoading(true)
               router.push("/church");
             }}
           >
@@ -73,6 +50,7 @@ function Home() {
 
           <div
             onClick={() => {
+              setIsLoading(true)
               router.push("/ministry");
             }}
           >
@@ -86,6 +64,7 @@ function Home() {
 
           <div
             onClick={() => {
+              setIsLoading(true)
               router.push("/news");
             }}
           >
@@ -96,6 +75,7 @@ function Home() {
         <div className="icones">
           <div
             onClick={() => {
+              setIsLoading(true)
               router.push("/bible");
             }}
           >
@@ -105,6 +85,7 @@ function Home() {
 
           <div
             onClick={() => {
+              setIsLoading(true)
               router.push("/prayer");
             }}
           >
@@ -114,6 +95,7 @@ function Home() {
 
           <div
             onClick={() => {
+              setIsLoading(true)
               router.push("/photos");
             }}
           >
@@ -140,6 +122,7 @@ function Home() {
 
           <div
             onClick={() => {
+              setIsLoading(true)
               router.push("/pgi");
             }}
           >
@@ -149,6 +132,7 @@ function Home() {
 
           <div
             onClick={() => {
+              setIsLoading(true)
               router.push("/schedule");
             }}
           >
@@ -157,9 +141,6 @@ function Home() {
           </div>
         </div>
       </div>
-      {/* <footer>
-        <p>Rodapé aqui...</p>
-      </footer> */}
     </div>
   );
 }

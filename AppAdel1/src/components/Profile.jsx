@@ -16,6 +16,7 @@ import { useLoadingContext } from "@/context/LoadingContext";
 import Loading from "./Loading";
 import { decodeUser } from "@/utils";
 import { updateUser } from "@/service/userAPI";
+import { useUserContext } from "@/context/UserContext";
 
 export default function Profile() {
   const [email, setEmail] = useState("");
@@ -29,6 +30,7 @@ export default function Profile() {
   const [originalInfos, setOriginalInfos] = useState({});
   const [allInfosInvalid, setAllInfosInvalid] = useState(true);
   const { setGlobalLoading, isLoading } = useLoadingContext();
+  const { setInfosChanged, infosChanged } = useUserContext();
   const router = useRouter();
 
   const fillUserInfos = () => {
@@ -59,7 +61,7 @@ export default function Profile() {
 
   useEffect(() => {
     const isAuthenticated = authentication();
-    if (isAuthenticated) {
+    if (isAuthenticated === '/') {
       localStorage.clear();
       router.push(isAuthenticated);
       return;
@@ -102,6 +104,7 @@ export default function Profile() {
           : ["Dado Atualizado com sucesso", "success"]
       );
     }
+    setInfosChanged(!infosChanged)
     setTimeout(() => {
       setUpdateInfo(['', ''])
     }, 2000)

@@ -16,7 +16,7 @@ export default function Ministry() {
 
   useEffect(() => {
     const isAuthenticated = authentication();
-    if (isAuthenticated) {
+    if (isAuthenticated === '/') {
       localStorage.clear();
       router.push(isAuthenticated);
       return;
@@ -29,7 +29,10 @@ export default function Ministry() {
   return (
     <Box>
       <Box 
-        sx={{overflow:"auto"}}
+        sx={{overflow:"auto",
+          height:"85vh",
+          padding:"10px",
+        }}
         display="flex"
         alignItems="center"
         flexDirection="column"
