@@ -1,7 +1,7 @@
 "use client";
 import { authentication } from "@/auth";
 import { decodeUser } from "@/utils";
-import { ExitToApp, Person } from "@material-ui/icons";
+import { ArrowBack, ExitToApp, Person } from "@material-ui/icons";
 import {
   Box,
   Button,
@@ -10,7 +10,6 @@ import {
   Typography,
 } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
-import config from "../img/configuracao.png";
 import React, { useEffect, useState } from "react";
 import { useLoadingContext } from "@/context/LoadingContext";
 import { useUserContext } from "@/context/UserContext";
@@ -66,15 +65,15 @@ export default function Header() {
       >
         <Button
           onClick={() => {
-            router.push("/settings");
+            router.push("/home");
           }}
           disabled={nameInitials === "US"}
           className="config"
-          sx={{ marginTop: "-5px" }}
+          sx={{ marginTop: "-2px", color:"white" }}
         >
-          <img src={config.src} alt="Configuração" className="imgconfig" />
+          <ArrowBack fontSize="large" />
         </Button>
-        {pathName !== "/home" && (
+        {/* {pathName !== "/home" && (
           <Image
             onClick={() => {
               setGlobalLoading(true);
@@ -84,7 +83,7 @@ export default function Header() {
             width={39}
             src={homeLogo.src}
           />
-        )}
+        )} */}
         <Box sx={{ display: "flex" }}>
           <Box sx={{ right: 15, top: 50, position: "absolute" }}>
             <Collapse
