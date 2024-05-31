@@ -215,7 +215,7 @@ export default function LoginPage() {
               Guardar Senha
             </Typography>
           </Box>
-          <span className="resetpassord">Esqueceu a senha?</span>
+          {/* <span className="resetpassord">Esqueceu a senha?</span> */}
         </Box>
         <Button
           disabled={button}
