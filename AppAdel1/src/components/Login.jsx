@@ -136,7 +136,7 @@ export default function LoginPage() {
         </Box>
         <Box display="flex" justifyContent="center">
           <Typography fontWeight={800} variant="h4" color="white">
-            Bem Vindo!
+            Bem Vindo
           </Typography>
         </Box>
         <Box display="flex" justifyContent="center">
