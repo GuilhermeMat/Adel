@@ -14,24 +14,13 @@ import { useEffect, useState } from "react";
 import { authentication } from "@/auth";
 import Loading from "./Loading";
 import { Box } from "@mui/material";
-
-const fetchRandomVerse = async () => {
-  try {
-    const response = await fetch('https://www.abibliadigital.com.br/api/verses/:version/random');
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Erro ao buscar Versículo', error);
-  }
-}
-fetchRandomVerse().then((verse) => {
-  console.log(verse);
-}); 
+import axios from "axios";
+import Paragraph from "./Paragraph";
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-
+  
   useEffect(() => {
     const isAuthenticated = authentication();
     if (isAuthenticated === '/') {
@@ -39,9 +28,24 @@ function Home() {
       router.push(isAuthenticated);
       return;
     }
+    fetchRandomVerse();
     setIsLoading(false);
   }, []);
 
+  const fetchRandomVerse = async () => {
+    try {
+      const response = await axios('https://www.abibliadigital.com.br/api/verses/nvi/random', {
+        headers: {
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHIiOiJUdWUgSnVuIDA0IDIwMjQgMTU6NTU6MjggR01UKzAwMDAud29ya2FkbXNidXNpbmVzc0BnbWFpbC5jb20iLCJpYXQiOjE3MTc1MTY1Mjh9.5cyKSiq57TGxlntPyWSNNJs6TcfOhwCaluwS1OEp8h8"
+        }
+      });
+      console.log(response.data)
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao buscar Versículo', error);
+    }
+  } 
+  
   if (isLoading) return <Loading />;
 
   return (
@@ -155,8 +159,14 @@ function Home() {
           </div>
         </div>
       </div>
-      <Box>
-        
+      <Box sx={{
+        width:"auto",
+        display:"flex",
+        justifyContent:"center",
+        marginTop: "45px",
+        border: "red solid 1px"
+      }}>
+        <Paragraph {...{number: 5, text:"asregihasdfgijsdffbhbnrnjgçijerng çoserajogharuigahnçgvndsgvjabvd"}} />
       </Box>
     </div>
   );
