@@ -13,6 +13,20 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { authentication } from "@/auth";
 import Loading from "./Loading";
+import { Box } from "@mui/material";
+
+const fetchRandomVerse = async () => {
+  try {
+    const response = await fetch('https://www.abibliadigital.com.br/api/verses/:version/random');
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Erro ao buscar Versículo', error);
+  }
+}
+fetchRandomVerse().then((verse) => {
+  console.log(verse);
+}); 
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -141,6 +155,9 @@ function Home() {
           </div>
         </div>
       </div>
+      <Box>
+        
+      </Box>
     </div>
   );
 }
