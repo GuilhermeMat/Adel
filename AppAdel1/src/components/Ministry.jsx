@@ -1,9 +1,9 @@
-'use client'
+"use client";
 import { Box, Typography } from "@mui/material";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import { CardActionArea } from '@mui/material';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import { CardActionArea } from "@mui/material";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useLoadingContext } from "@/context/LoadingContext";
@@ -11,32 +11,29 @@ import Loading from "./Loading";
 import { authentication } from "@/auth";
 
 export default function Ministry() {
-  const { isLoading, setGlobalLoading } = useLoadingContext()
-  const router = useRouter()
+  const { isLoading, setGlobalLoading } = useLoadingContext();
+  const router = useRouter();
 
   useEffect(() => {
     const isAuthenticated = authentication();
-    if (isAuthenticated === '/') {
+    if (isAuthenticated === "/") {
       localStorage.clear();
       router.push(isAuthenticated);
       return;
     }
-    setGlobalLoading(false)
-  }, [])
+    setGlobalLoading(false);
+  }, []);
 
-  if (isLoading) return <Loading />
+  if (isLoading) return <Loading />;
 
   return (
     <Box>
-      <Box 
-        sx={{overflow:"auto",
-          height:"85vh",
-          padding:"10px",
-        }}
+      <Box
+        sx={{ overflow: "auto", height: "85vh", padding: "10px" }}
         display="flex"
         alignItems="center"
         flexDirection="column"
-        >
+>
         <Box
           sx={{overflowY:"auto",
           height: "85vh"
@@ -95,6 +92,7 @@ export default function Ministry() {
             </Card>
             </Box>
         </Box>
+      </Box>
     </Box>
   );
 }
