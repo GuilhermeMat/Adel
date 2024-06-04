@@ -30,12 +30,6 @@ function Church() {
       flexDirection="column"
     >
       <Box>
-        <Box sx={{ textAlign: "center", margin: "0 0 20px 0" }}>
-          <Typography color="#fff">Adel - Parque Alvorada 1</Typography>
-          <Typography color="#fff">
-            Ministério Madureira - Luziânia-GO
-          </Typography>
-        </Box>
         <Box>
           <Box sx={{ textAlign: "center", margin: "0 0 20px 0" }}>
             <Typography color="#fff">Adel - Parque Alvorada 1</Typography>
