@@ -136,7 +136,7 @@ export default function LoginPage() {
         </Box>
         <Box display="flex" justifyContent="center">
           <Typography fontWeight={800} variant="h4" color="white">
-            Bem Vindo!
+            Bem Vindo
           </Typography>
         </Box>
         <Box display="flex" justifyContent="center">
@@ -215,7 +215,7 @@ export default function LoginPage() {
               Guardar Senha
             </Typography>
           </Box>
-          <span className="resetpassord">Esqueceu a senha?</span>
+          {/* <span className="resetpassord">Esqueceu a senha?</span> */}
         </Box>
         <Button
           disabled={button}

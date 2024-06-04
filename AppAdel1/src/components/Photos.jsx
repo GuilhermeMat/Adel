@@ -31,7 +31,11 @@ const Photos = () => {
   }, []);
 
   return (
-    <Box>
+    <Box
+    sx={{overflowY:"auto",
+          height: "85vh"
+        }}
+    >
       <div>
         <h1 style={{ textAlign: "center", color: "white" }}>Fotos</h1>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
