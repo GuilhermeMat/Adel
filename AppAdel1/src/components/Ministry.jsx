@@ -93,6 +93,5 @@ export default function Ministry() {
             </Box>
         </Box>
       </Box>
-    </Box>
   );
 }
