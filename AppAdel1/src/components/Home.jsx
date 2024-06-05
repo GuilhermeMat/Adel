@@ -160,13 +160,18 @@ function Home() {
         </div>
       </div>
       <Box sx={{
-        width:"auto",
-        display:"flex",
-        justifyContent:"center",
-        marginTop: "45px",
-        border: "red solid 1px"
-      }}>
-        <Paragraph {...{number: 5, text:"asregihasdfgijsdffbhbnrnjgçijerng çoserajogharuigahnçgvndsgvjabvd"}} />
+          width:"auto",
+          display: "ruby-text",
+          alignContent:"center",
+        }}>
+        <Box sx={{
+          width:"60%",
+          display:"flex",
+          justifyContent:"center",
+          marginTop: "45px",
+        }}>
+            <Paragraph {...{number: 5, text:"E conhecereis a verdade, e a verdade vos libertará. João 8:32"}} />
+        </Box>
       </Box>
     </div>
   );
