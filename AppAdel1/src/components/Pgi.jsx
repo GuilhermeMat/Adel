@@ -9,6 +9,11 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { authentication } from "@/auth";
 import Loading from "./Loading";
+import Image from "next/image";
+import jovensimg from "../img/jovens.png";
+import varoesimg from "../img/varoes.png";
+import irmasimg from "../img/irmas.png";
+import adolecentesimg from "../img/adolecentes.png";
 
 export default function Pgi() {
   const { isLoading, setGlobalLoading } = useLoadingContext();
@@ -32,25 +37,32 @@ export default function Pgi() {
       alignItems="center"
       flexDirection="column"
     >
-      <Box sx={{
-        height: "85vh",
-        padding:"10px",
-      }}>
+      <Box
+        sx={{
+          height: "85vh",
+          padding: "10px",
+        }}
+      >
         <Box style={{ margin: "50px" }}>
           <Typography color="#fff">
             Ministério Madureira - Luziânia-GO
           </Typography>
         </Box>
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, margin: "0px 0 10px 0" }}>
           <CardActionArea>
-            <CardMedia
-              component="img"
-              height="140"
-              image="/static/images/cards/contemplative-reptile.jpg"
+            <Image
+              height="240"
+              width="345"
+              src={jovensimg.src}
               alt="green iguana"
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography
+                gutterBottom
+                variant="h5"
+                fontWeight={700}
+                fontFamily="serif"
+              >
                 Jovens
               </Typography>
               <Typography
@@ -66,16 +78,21 @@ export default function Pgi() {
             </CardContent>
           </CardActionArea>
         </Card>
-        <Card sx={{ maxWidth: 345, margin: "5px 0 0 0" }}>
+        <Card sx={{ maxWidth: 345, margin: "10px 0 10px 0" }}>
           <CardActionArea>
-            <CardMedia
-              component="img"
-              height="140"
-              image="/static/images/cards/contemplative-reptile.jpg"
+            <Image
+              height="260"
+              width="345"
+              src={varoesimg.src}
               alt="green iguana"
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography
+                gutterBottom
+                variant="h5"
+                fontWeight={700}
+                fontFamily="serif"
+              >
                 Varões
               </Typography>
               <Typography
@@ -91,16 +108,21 @@ export default function Pgi() {
             </CardContent>
           </CardActionArea>
         </Card>
-        <Card sx={{ maxWidth: 345, margin: "5px 0 0 0" }}>
+        <Card sx={{ maxWidth: 345, margin: "10px 0 10px 0" }}>
           <CardActionArea>
-            <CardMedia
-              component="img"
-              height="140"
-              image="/static/images/cards/contemplative-reptile.jpg"
+            <Image
+              height="260"
+              width="345"
+              src={irmasimg.src}
               alt="green iguana"
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography
+                gutterBottom
+                variant="h5"
+                fontWeight={700}
+                fontFamily="serif"
+              >
                 Irmãs
               </Typography>
               <Typography
@@ -116,16 +138,21 @@ export default function Pgi() {
             </CardContent>
           </CardActionArea>
         </Card>
-        <Card sx={{ maxWidth: 345, margin: "5px 0 25px 0" }}>
+        <Card sx={{ maxWidth: 345, margin: "10px 0 25px 0" }}>
           <CardActionArea>
-            <CardMedia
-              component="img"
-              height="140"
-              image="/static/images/cards/contemplative-reptile.jpg"
+            <Image
+              height="260"
+              width="345"
+              src={adolecentesimg.src}
               alt="green iguana"
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography
+                gutterBottom
+                variant="h5"
+                fontWeight={700}
+                fontFamily="serif"
+              >
                 Adolecentes
               </Typography>
               <Typography
