@@ -60,15 +60,17 @@ export default function Profile() {
   };
 
   useEffect(() => {
-    const isAuthenticated = authentication();
-    if (isAuthenticated === '/') {
-      localStorage.clear();
-      router.push(isAuthenticated);
-      return;
+    if (isLoading) {
+      const isAuthenticated = authentication();
+      if (isAuthenticated === '/') {
+        localStorage.clear();
+        router.push(isAuthenticated);
+        return;
+      }
+      fillUserInfos();
+      setGlobalLoading(false);
     }
-    fillUserInfos();
-    setGlobalLoading(false);
-  }, []);
+  }, [isLoading]);
 
   const handleName = (event) => {
     setName(event.target.value);
