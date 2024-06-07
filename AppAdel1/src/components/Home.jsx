@@ -13,17 +13,19 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { authentication } from "@/auth";
 import Loading from "./Loading";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import axios from "axios";
 import Paragraph from "./Paragraph";
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [bibleInfos, setBibleInfos] = useState({ number: 0, text: "" });
+  const [bookInfos, setBookInfos] = useState("");
   const router = useRouter();
-  
+
   useEffect(() => {
     const isAuthenticated = authentication();
-    if (isAuthenticated === '/') {
+    if (isAuthenticated === "/") {
       localStorage.clear();
       router.push(isAuthenticated);
       return;
@@ -34,18 +36,26 @@ function Home() {
 
   const fetchRandomVerse = async () => {
     try {
-      const response = await axios('https://www.abibliadigital.com.br/api/verses/nvi/random', {
-        headers: {
-          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHIiOiJUdWUgSnVuIDA0IDIwMjQgMTU6NTU6MjggR01UKzAwMDAud29ya2FkbXNidXNpbmVzc0BnbWFpbC5jb20iLCJpYXQiOjE3MTc1MTY1Mjh9.5cyKSiq57TGxlntPyWSNNJs6TcfOhwCaluwS1OEp8h8"
+      const response = await axios(
+        "https://www.abibliadigital.com.br/api/verses/nvi/random",
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHIiOiJUdWUgSnVuIDA0IDIwMjQgMTU6NTU6MjggR01UKzAwMDAud29ya2FkbXNidXNpbmVzc0BnbWFpbC5jb20iLCJpYXQiOjE3MTc1MTY1Mjh9.5cyKSiq57TGxlntPyWSNNJs6TcfOhwCaluwS1OEp8h8",
+          },
         }
-      });
-      console.log(response.data)
+      );
+      console.log(response.data);
+      setBookInfos(
+        `${response.data.book.author} ${response.data.chapter}: ${response.data.number}`
+      );
+      setBibleInfos({ number: response.data.number, text: response.data.text });
       return response.data;
     } catch (error) {
-      console.error('Erro ao buscar Versículo', error);
+      console.error("Erro ao buscar Versículo", error);
     }
-  } 
-  
+  };
+
   if (isLoading) return <Loading />;
 
   return (
@@ -58,7 +68,7 @@ function Home() {
         <div className="icones">
           <div
             onClick={() => {
-              setIsLoading(true)
+              setIsLoading(true);
               router.push("/church");
             }}
           >
@@ -68,7 +78,7 @@ function Home() {
 
           <div
             onClick={() => {
-              setIsLoading(true)
+              setIsLoading(true);
               router.push("/ministry");
             }}
           >
@@ -82,7 +92,7 @@ function Home() {
 
           <div
             onClick={() => {
-              setIsLoading(true)
+              setIsLoading(true);
               router.push("/news");
             }}
           >
@@ -93,7 +103,7 @@ function Home() {
         <div className="icones">
           <div
             onClick={() => {
-              setIsLoading(true)
+              setIsLoading(true);
               router.push("/bible");
             }}
           >
@@ -103,7 +113,7 @@ function Home() {
 
           <div
             onClick={() => {
-              setIsLoading(true)
+              setIsLoading(true);
               router.push("/prayer");
             }}
           >
@@ -113,7 +123,7 @@ function Home() {
 
           <div
             onClick={() => {
-              setIsLoading(true)
+              setIsLoading(true);
               router.push("/photos");
             }}
           >
@@ -140,7 +150,7 @@ function Home() {
 
           <div
             onClick={() => {
-              setIsLoading(true)
+              setIsLoading(true);
               router.push("/pgi");
             }}
           >
@@ -150,7 +160,7 @@ function Home() {
 
           <div
             onClick={() => {
-              setIsLoading(true)
+              setIsLoading(true);
               router.push("/schedule");
             }}
           >
@@ -159,15 +169,38 @@ function Home() {
           </div>
         </div>
       </div>
-      <Box sx={{
-        width:"auto",
-        display:"flex",
-        justifyContent:"center",
-        marginTop: "45px",
-        border: "red solid 1px"
-      }}>
-        <Paragraph {...{number: 5, text:"asregihasdfgijsdffbhbnrnjgçijerng çoserajogharuigahnçgvndsgvjabvd"}} />
-      </Box>
+      {bibleInfos.number && (
+        <Box
+          sx={{
+            width: "90%",
+            display: "flex",
+            justifyContent:"center",
+            margin:"0 auto 0 auto",
+            alignContent: "center",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection:"column",
+            }}
+          >
+            <Paragraph
+              {...{
+                number: bibleInfos.number,
+                text: bibleInfos.text,
+              }}
+            />
+            <Typography
+            sx={{
+              color:"#fff",
+            }}
+            >
+              {bookInfos}
+            </Typography>
+          </Box>
+        </Box>
+      )}
     </div>
   );
 }

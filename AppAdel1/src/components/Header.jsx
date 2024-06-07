@@ -43,7 +43,7 @@ export default function Header() {
 
   useEffect(() => {
     const isAuthenticated = authentication();
-    if (isAuthenticated === '/') {
+    if (isAuthenticated === "/") {
       localStorage.clear();
       router.push(isAuthenticated);
       return;
@@ -57,33 +57,23 @@ export default function Header() {
       <Box
         sx={{
           display: "flex",
-          // border: "1px solid red",
           alignItems: "center",
           width: "100vw",
-          justifyContent: "space-between",
+          justifyContent: pathName === "/home" ? "flex-end" : "space-between",
         }}
       >
-        <Button
-          onClick={() => {
-            router.push("/home");
-          }}
-          disabled={nameInitials === "US"}
-          className="config"
-          sx={{ marginTop: "-2px", color:"white" }}
-        >
-          <ArrowBack fontSize="large" />
-        </Button>
-        {/* {pathName !== "/home" && (
-          <Image
+        {pathName !== "/home" && (
+          <Button
             onClick={() => {
-              setGlobalLoading(true);
-              router.push("/home")
+              router.push("/home");
             }}
-            height={39}
-            width={39}
-            src={homeLogo.src}
-          />
-        )} */}
+            disabled={nameInitials === "US"}
+            className="config"
+            sx={{ marginTop: "-2px", color: "white" }}
+          >
+            <ArrowBack fontSize="large" />
+          </Button>
+        )}
         <Box sx={{ display: "flex" }}>
           <Box sx={{ right: 15, top: 50, position: "absolute" }}>
             <Collapse
@@ -93,7 +83,6 @@ export default function Header() {
                 borderRadius: "8px 0 8px 8px",
               }}
               in={open}
-              // unmountOnExit
               mountOnEnter
             >
               <Box sx={{ display: "flex", flexDirection: "column" }}>
