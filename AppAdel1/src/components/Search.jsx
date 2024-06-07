@@ -51,6 +51,9 @@ export default function Search() {
     if (msg) {
       setErrorMsg(msg);
       setCompLoading(false);
+      setTimeout(() => {
+        setErrorMsg('')
+      }, 3000)
       return;
     }
     treatVerses(data.verses);

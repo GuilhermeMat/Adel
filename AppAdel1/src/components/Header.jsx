@@ -13,8 +13,6 @@ import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useLoadingContext } from "@/context/LoadingContext";
 import { useUserContext } from "@/context/UserContext";
-import Image from "next/image";
-import homeLogo from "../img/adel.png";
 
 export default function Header() {
   const [nameInitials, setNameInitials] = useState("US");
@@ -37,7 +35,6 @@ export default function Header() {
     setGlobalLoading(true);
     setOpen(!open);
     localStorage.clear();
-    sessionStorage.clear();
     router.push("/");
   };
 
@@ -65,6 +62,7 @@ export default function Header() {
         {pathName !== "/home" && (
           <Button
             onClick={() => {
+              setGlobalLoading(true);
               router.push("/home");
             }}
             disabled={nameInitials === "US"}

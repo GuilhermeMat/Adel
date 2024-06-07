@@ -174,7 +174,7 @@ function Home() {
             width: "90%",
             display: "flex",
             justifyContent: "center",
-            margin: "0 auto 0 auto",
+            margin: "20px auto 0 auto",
             alignContent: "center",
           }}
         >
@@ -182,6 +182,7 @@ function Home() {
             sx={{
               display: "flex",
               flexDirection: "column",
+              alignItems: "center",
             }}
           >
             <Paragraph

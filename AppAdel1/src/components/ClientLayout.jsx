@@ -2,8 +2,8 @@
 
 import { usePathname } from "next/navigation";
 import Header from "./Header";
-import { LoadingProvider } from "@/context/LoadingContext";
 import { UserProvider } from "@/context/UserContext";
+import { LoadingProvider } from "@/context/LoadingContext";
 
 const ClientLayout = ({ children }) => {
   const pathName = usePathname();
@@ -12,12 +12,10 @@ const ClientLayout = ({ children }) => {
   return (
     <>
       <UserProvider>
-        {showHeader && (
-          <LoadingProvider>
-            <Header />
-          </LoadingProvider>
-        )}
-        <main>{children}</main>
+        <LoadingProvider>
+          {showHeader && <Header />}
+          <main>{children}</main>
+        </LoadingProvider>
       </UserProvider>
     </>
   );

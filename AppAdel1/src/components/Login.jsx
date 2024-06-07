@@ -26,25 +26,24 @@ export default function LoginPage() {
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [visibility, setVisibility] = useState(false);
-  const [passwordCheckbox, setPasswordCheckbox] = useState(false);
   const [pass, setPass] = useState("");
 
-  const CustomCheckbox = styled(Checkbox)(({ theme }) => ({
-    "& .MuiSvgIcon-root": {
-      borderRadius: "3px", // Ajuste do raio da borda
-      border: "0.5px solid white", // Cor da borda
-      color: "transparent", // Para garantir que a cor interna não apareça
-      height: "14px",
-      width: "14px",
-    },
-    "&.Mui-checked .MuiSvgIcon-root": {
-      border: "0.5px solid white", // Cor da borda quando checado
-      // backgroundColor: "white", // Cor de fundo quando checado
-      color: theme.palette.primary.main, // Cor do ícone checado
-      height: "14px",
-      width: "14px",
-    },
-  }));
+  // const CustomCheckbox = styled(Checkbox)(({ theme }) => ({
+  //   "& .MuiSvgIcon-root": {
+  //     borderRadius: "3px", // Ajuste do raio da borda
+  //     border: "0.5px solid white", // Cor da borda
+  //     color: "transparent", // Para garantir que a cor interna não apareça
+  //     height: "14px",
+  //     width: "14px",
+  //   },
+  //   "&.Mui-checked .MuiSvgIcon-root": {
+  //     border: "0.5px solid white", // Cor da borda quando checado
+  //     // backgroundColor: "white", // Cor de fundo quando checado
+  //     color: theme.palette.primary.main, // Cor do ícone checado
+  //     height: "14px",
+  //     width: "14px",
+  //   },
+  // }));
 
   const handleEmail = (event) => {
     setEmail(event.target.value);
@@ -65,11 +64,7 @@ export default function LoginPage() {
         }
       );
       if (response.status === 200) {
-        if (passwordCheckbox) {
-          localStorage.setItem("token", JSON.stringify(response.data.token));
-        } else {
-          sessionStorage.setItem("token", JSON.stringify(response.data.token))
-        }
+        localStorage.setItem("token", JSON.stringify(response.data.token));
         router.push("/home");
       }
     } catch (error) {
@@ -189,34 +184,10 @@ export default function LoginPage() {
             placeholder="Senha"
           />
         </Box>
-        <Box className="savepassword">
-          <Box className="check">
-            {/* <input type="checkbox" /> */}
-            <FormControlLabel
-              sx={{ width: "20px", height: "10px" }}
-              control={
-                <CustomCheckbox
-                  checked={passwordCheckbox}
-                  onChange={() => setPasswordCheckbox(!passwordCheckbox)}
-                />
-              }
-              label="Custom Checkbox"
-            />
-            {/* <Checkbox
-              sx={{
-                backgroundColor: "white",
-                borderRadius: "0px",
-                height: "10px",
-                width: "10px",
-              }}
-              size="small"
-            /> */}
-            <Typography variant="caption" color="#fff" margin="0 0 0 8px">
-              Guardar Senha
-            </Typography>
-          </Box>
+        {/* Implementar depois sistema de recuperação de senha para bizonhos */}
+        {/* <Box className="savepassword">
           <span className="resetpassord">Esqueceu a senha?</span>
-        </Box>
+        </Box> */}
         <Button
           disabled={button}
           onClick={requestLogin}
