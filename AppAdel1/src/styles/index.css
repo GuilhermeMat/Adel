@@ -1,53 +1,81 @@
 * {
-    margin: 0;
+  margin: 0;
 }
 
 .pageContainer {
-    background-color: black;
-    background-image: url('../img//Rectangle\ 98.png');
-    background-repeat: no-repeat;
-    background-size: 100% 22%;
-    height: 100vh;
-    overflow: hidden;
+  background-color: black;
+  background-image: url("../img//Rectangle\ 98.png");
+  background-repeat: no-repeat;
+  background-size: 100% 22%;
+  height: 100vh;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+.imgconfig,
+.imgperfil {
+  width: 35px;
+}
+.divlogo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+.imglogo {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+.icones {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+.pagigreja,
+.pagministerio,
+.pagnoticia,
+.pagbiblia,
+.pagoracao,
+.pagfoto,
+.paginstagram,
+.paggrupo,
+.pagagenda {
+  display: block;
+  align-items: center;
+  text-align: center;
+}
+.icones .pagigreja:hover,
+.pagministerio:hover,
+.pagnoticia:hover,
+.pagbiblia:hover,
+.pagoracao:hover,
+.pagfoto:hover,
+.paginstagram:hover,
+.paggrupo:hover,
+.pagagenda:hover {
+  background-color: #7fffd430;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.imgconfig,
+.imgperfil {
+  padding: 20px;
+}
+
+@keyframes slide1 {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
   }
 
-.nav{
-    display: flex;
-    justify-content: space-between;
-}
-.imgconfig, .imgperfil{
-    width: 35px;
-}
-.divlogo{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-}
-.imglogo{
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-}
-.icones{
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: space-around;
-    margin-top: 50px;
-}
-.pagigreja, .pagministerio, .pagnoticia, .pagbiblia, .pagoracao, .pagfoto, .paginstagram, .paggrupo, .pagagenda{
-    display: block;
-    align-items: center;
-    text-align: center;
-}
-.icones .pagigreja:hover, .pagministerio:hover, .pagnoticia:hover, .pagbiblia:hover, .pagoracao:hover, .pagfoto:hover, .paginstagram:hover, .paggrupo:hover, .pagagenda:hover{
-    background-color: #7fffd430;
-    transition: 0.3s;
-    border-radius: 5px;
-}
-
-.imgconfig, .imgperfil {
-    padding: 20px;
+  50% {
+    transform: translate(0, 10px) rotate(0deg);
+  }
 }

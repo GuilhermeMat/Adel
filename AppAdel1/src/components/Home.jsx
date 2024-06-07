@@ -37,15 +37,14 @@ function Home() {
   const fetchRandomVerse = async () => {
     try {
       const response = await axios(
-        "https://www.abibliadigital.com.br/api/verses/nvi/random",
+        `${process.env.NEXT_PUBLIC_BIBLE_BASE_URL}/verses/nvi/random`,
         {
           headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHIiOiJUdWUgSnVuIDA0IDIwMjQgMTU6NTU6MjggR01UKzAwMDAud29ya2FkbXNidXNpbmVzc0BnbWFpbC5jb20iLCJpYXQiOjE3MTc1MTY1Mjh9.5cyKSiq57TGxlntPyWSNNJs6TcfOhwCaluwS1OEp8h8",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_BIBLE_USER_TOKEN}`,
           },
         }
       );
-      console.log(response.data);
+      console.log(response);
       setBookInfos(
         `${response.data.book.author} ${response.data.chapter}: ${response.data.number}`
       );
@@ -174,15 +173,15 @@ function Home() {
           sx={{
             width: "90%",
             display: "flex",
-            justifyContent:"center",
-            margin:"0 auto 0 auto",
+            justifyContent: "center",
+            margin: "0 auto 0 auto",
             alignContent: "center",
           }}
         >
           <Box
             sx={{
               display: "flex",
-              flexDirection:"column",
+              flexDirection: "column",
             }}
           >
             <Paragraph
@@ -192,9 +191,9 @@ function Home() {
               }}
             />
             <Typography
-            sx={{
-              color:"#fff",
-            }}
+              sx={{
+                color: "#fff",
+              }}
             >
               {bookInfos}
             </Typography>
