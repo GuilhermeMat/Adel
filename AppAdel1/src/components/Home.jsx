@@ -32,7 +32,7 @@ function Home() {
     }
     fetchRandomVerse();
     setIsLoading(false);
-  }, []);
+  }, [])
 
   const fetchRandomVerse = async () => {
     try {
