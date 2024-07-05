@@ -34,7 +34,7 @@ export default function Header() {
   const logOut = () => {
     setGlobalLoading(true);
     setOpen(!open);
-    localStorage.clear();
+    localStorage.removeItem('token');
     router.push("/");
   };
 
