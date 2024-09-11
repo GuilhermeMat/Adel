@@ -2,12 +2,20 @@
 import { authentication } from "@/auth";
 import { useLoadingContext } from "@/context/LoadingContext";
 import { booksOfBible } from "@/service/bibleInfos";
-import { Alert, Box, Button, InputBase, Slide, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  InputBase,
+  Slide,
+  Typography,
+} from "@mui/material";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Loading from "./Loading";
-import { requestBibleInfos } from "@/service/bibleAPI";
+import { getChaptersLimit, requestBibleInfos } from "@/service/bibleAPI";
 import Paragraph from "./Paragraph";
+import { NavigateBefore, NavigateNext } from "@material-ui/icons";
 
 export default function Search() {
   const [bookName, setBookName] = useState();
@@ -17,6 +25,8 @@ export default function Search() {
   const [versesList, setVersesList] = useState([]);
   const [compLoading, setCompLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [currentChapter, setCurrentChapter] = useState("");
+  const [limit, setLimit] = useState();
   const { isLoading, setGlobalLoading } = useLoadingContext();
   const params = useParams();
 
@@ -43,17 +53,24 @@ export default function Search() {
     setVersesList(versesList);
   };
 
-  const handleSearch = async () => {
+  const handleSearch = async (userControl) => {
+    let errorMsg = ''
     setCompLoading(true);
-    setVerse('');
-    setChapter('');
-    const { data, msg } = await requestBibleInfos(bookName.abbrev, chapter);
-    if (msg) {
+    setCurrentChapter(userControl || chapter);
+    setVerse("");
+    setChapter("");
+    const limit = await getChaptersLimit(bookName.abbrev)
+    setLimit(limit.data.chapters)
+    const { data, msg } = await requestBibleInfos(bookName.abbrev, userControl ? userControl : chapter);
+    if (msg || limit.msg) {
       setErrorMsg(msg);
       setCompLoading(false);
+      setLimit()
+      setCurrentChapter('')
+      setVersesList([])
       setTimeout(() => {
-        setErrorMsg('')
-      }, 3000)
+        setErrorMsg("");
+      }, 3000);
       return;
     }
     treatVerses(data.verses);
@@ -75,13 +92,18 @@ export default function Search() {
 
   useEffect(() => {
     const isAuthenticated = authentication();
-    if (isAuthenticated === '/') {
+    if (isAuthenticated === "/") {
       localStorage.clear();
       router.push(isAuthenticated);
       return;
     }
     getBookName();
   }, []);
+
+  const handleChapterNavigation = (newChapter) => {
+    if (!newChapter) return
+    handleSearch(newChapter)
+  }
 
   if (isLoading) return <Loading />;
 
@@ -101,7 +123,7 @@ export default function Search() {
             left: "55px",
             transform: "translate(-50%, -50%)",
             zIndex: 2,
-            width: '300px'
+            width: "300px",
           }}
         >
           <Alert severity="error">{errorMsg}</Alert>
@@ -169,9 +191,42 @@ export default function Search() {
           </Box>
         </Box>
       </Box>
+      {currentChapter && (
+        <Box
+          sx={{
+            alignItems: 'center',
+            display: 'flex',
+            justifyContent: 'space-around',
+            height: '30px'
+          }}
+        >
+          <Button
+            onClick={() => handleChapterNavigation(Number(currentChapter) - 1)}
+            disabled={currentChapter === 1}
+          >
+            <NavigateBefore style={{ fontSize: 30 }} />
+          </Button>
+          <Box
+            sx={{
+              display: 'flex',
+              width: '80px',
+              justifyContent: 'space-between'
+            }}
+          >
+            <Typography sx={{ color: "white" }}>Capítulo</Typography>
+            <Typography sx={{ color: "white", fontWeight: 600 }}>{currentChapter}</Typography>
+          </Box>
+          <Button
+            onClick={() => handleChapterNavigation(Number(currentChapter) + 1)}
+            disabled={currentChapter === limit}
+          >
+            <NavigateNext style={{ fontSize: 30 }} />
+          </Button>
+        </Box>
+      )}
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Button
-          onClick={handleSearch}
+          onClick={() => handleSearch()}
           disabled={cannotSearch}
           variant="outlined"
           sx={{ border: "1px solid rgba(76, 172, 253, 0.8)", color: "white" }}
