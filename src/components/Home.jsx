@@ -30,7 +30,15 @@ function Home() {
       router.push(isAuthenticated);
       return;
     }
-    fetchRandomVerse();
+    const infos = JSON.parse(localStorage.getItem('bookInfos'))
+    const verse = JSON.parse(localStorage.getItem('bibleInfos'))
+    const expTime = JSON.parse(localStorage.getItem('exp'))
+    if (infos && verse && expTime && new Date().getTime() < expTime) {
+      setBookInfos(infos)
+      setBibleInfos(verse)
+    } else {
+      fetchRandomVerse();
+    }
     setIsLoading(false);
   }, [])
 
@@ -44,11 +52,16 @@ function Home() {
           },
         }
       );
-      console.log(response);
       setBookInfos(
         `${response.data.book.author} ${response.data.chapter}: ${response.data.number}`
       );
+      localStorage.setItem(
+        'bookInfos',
+        JSON.stringify(`${response.data.book.author} ${response.data.chapter}: ${response.data.number}`)
+      )
       setBibleInfos({ number: response.data.number, text: response.data.text });
+      localStorage.setItem('bibleInfos', JSON.stringify({ number: response.data.number, text: response.data.text }))
+      localStorage.setItem('exp', JSON.stringify(new Date().getTime() + 24 * 60 * 60 * 1000))
       return response.data;
     } catch (error) {
       console.error("Erro ao buscar Versículo", error);
