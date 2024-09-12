@@ -7,9 +7,11 @@ import Loading from "./Loading";
 import { useEffect, useState } from "react";
 import NewsCreation from "./NewsCreation";
 import Image from "next/image";
+import { decodeUser } from "@/utils";
 
 export default function News() {
   const [newsList, setNewsList] = useState([]);
+  const [itsAdm, setItsAdm] = useState();
   const { isLoading, setGlobalLoading } = useLoadingContext();
   const router = useRouter();
 
@@ -20,8 +22,16 @@ export default function News() {
       router.push(isAuthenticated);
       return;
     }
+    const result = decodeUser(JSON.parse(localStorage.getItem('token')))
+    if (result.id === `${process.env.NEXT_PUBLIC_SUPER_USER}`) {
+      setItsAdm(true)
+    }
     setGlobalLoading(false);
   }, []);
+
+  useEffect(() => {
+    console.log('itsAdm', itsAdm)
+  }, [itsAdm])
 
   if (isLoading) return <Loading />;
 
@@ -32,7 +42,7 @@ export default function News() {
         overflowY: "auto",
       }}
     >
-      <NewsCreation newsList={newsList} addNews={setNewsList} />
+      { itsAdm && <NewsCreation newsList={newsList} addNews={setNewsList} /> }
       <Divider sx={{ border: "1px solid grey" }} />
       {newsList.length
         ? newsList.map((news) => (
