@@ -1,23 +1,40 @@
 import { Box, Button, Input, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { createNews, showNews } from "@/service/newsAPI";
 
-const NewsCreation = ({ newsList, addNews }) => {
+const NewsCreation = ({ newsList, addNews, itsAdm }) => {
   const [fileName, setFileName] = useState();
   const [btnDisable, setBtnDisable] = useState(true);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [prepareFile, setPrepareFile] = useState();
   const [img, setImg] = useState();
 
   const handleFileChange = (event) => {
     const file = event.target.files && event.target.files[0];
 
     if (file) {
+      setPrepareFile(file)
       setFileName(file.name);
       const imageUrl = URL.createObjectURL(file);
       setImg(imageUrl);
     }
   };
+
+  const getNews = async () => {
+    const result = await showNews();
+    if (result.message === 'News not found') {
+      addNews([])
+    }
+    if (result?.data?.message.length) {
+      addNews(result?.data?.message)
+    }
+  }
+
+  useEffect(() => {
+    getNews()
+  }, [])
 
   useEffect(() => {
     if (img && title && description) {
@@ -27,13 +44,18 @@ const NewsCreation = ({ newsList, addNews }) => {
     }
   }, [img, title, description]);
 
-  const handleNewsCreation = () => {
+  const handleNewsCreation = async () => {
     const newList = JSON.parse(JSON.stringify(newsList))
     const newInfo = {
       title,
       src: img,
       description,
     }
+    const formData = new FormData();
+    formData.append('title', newInfo.title); 
+    formData.append('description', newInfo.description);
+    formData.append('img', prepareFile);
+    const result = await createNews(formData)
     newList.push(newInfo)
     addNews(newList)
     setImg("");
@@ -41,6 +63,8 @@ const NewsCreation = ({ newsList, addNews }) => {
     setDescription("");
     setFileName("");
   };
+
+  if (!itsAdm) return <></>
 
   return (
     <Box
@@ -141,6 +165,7 @@ const NewsCreation = ({ newsList, addNews }) => {
       >
         Criar Notícia
       </Button>
+      <Divider sx={{ border: "1px solid grey" }} />
     </Box>
   );
 };

@@ -7,9 +7,11 @@ import Loading from "./Loading";
 import { useEffect, useState } from "react";
 import NewsCreation from "./NewsCreation";
 import Image from "next/image";
+import { decodeUser } from "@/utils";
 
 export default function News() {
   const [newsList, setNewsList] = useState([]);
+  const [itsAdm, setItsAdm] = useState();
   const { isLoading, setGlobalLoading } = useLoadingContext();
   const router = useRouter();
 
@@ -19,6 +21,10 @@ export default function News() {
       localStorage.clear();
       router.push(isAuthenticated);
       return;
+    }
+    const result = decodeUser(JSON.parse(localStorage.getItem("token")));
+    if (result.id === `${process.env.NEXT_PUBLIC_SUPER_USER}`) {
+      setItsAdm(true);
     }
     setGlobalLoading(false);
   }, []);
@@ -32,30 +38,37 @@ export default function News() {
         overflowY: "auto",
       }}
     >
-      <NewsCreation newsList={newsList} addNews={setNewsList} />
-      <Divider sx={{ border: "1px solid grey" }} />
+      <Box>
+        <NewsCreation newsList={newsList} addNews={setNewsList} itsAdm={itsAdm} />
+      </Box>
       {newsList.length
         ? newsList.map((news) => (
             <Box
               sx={{
-                alignItems: 'center',
-                display: 'flex',
-                flexDirection: 'column',
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
               }}
             >
-              <Typography sx={{ color: "white", fontSize: '20px', fontWeight: 600 }}>{news.title}</Typography>
+              <Typography
+                sx={{ color: "white", fontSize: "20px", fontWeight: 600 }}
+              >
+                {news.title}
+              </Typography>
               <Box
                 sx={{
                   borderRadius: "8px",
                   overflow: "hidden",
                   width: 320,
                   height: 250,
-                  margin: '1% 0'
+                  margin: "1% 0",
                 }}
               >
                 <Image width={320} height={250} src={news.src} />
               </Box>
-              <Typography sx={{ color: "white", width: '300px', textAlign: 'justify'}}>
+              <Typography
+                sx={{ color: "white", width: "300px", textAlign: "justify" }}
+              >
                 {news.description}
               </Typography>
             </Box>
