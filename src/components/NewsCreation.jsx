@@ -1,4 +1,4 @@
-import { Box, Button, Input, Typography } from "@mui/material";
+import { Box, Button, Divider, Input, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { createNews, showNews } from "@/service/newsAPI";
